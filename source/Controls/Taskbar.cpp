@@ -27,7 +27,6 @@
 #include "DeviceControls/RemountTask.h"
 //#include "FTPOperations/FTPServerMenu.h"
 #include "Launcher/Applications.h"
-#include "network/networkops.h"
 //#include "SoundOperations/SoundHandler.hpp"
 //#include "SoundOperations/MusicPlayer.h"
 #include "input.h"
@@ -167,264 +166,36 @@ void Taskbar::Draw()
 		timeTxt->SetText(timetxt);
 	}
 
-	if(WifiImg == NULL && IsNetworkInit())
-	{
-		WifiData = Resources::GetImageData("network_wireless.png");
-		WifiImg = new GuiImage(WifiData);
-		WifiImg->SetAlignment(ALIGN_LEFT | ALIGN_MIDDLE);
-		WifiImg->SetPosition(418, 0);
-		Append(WifiImg);
-	}
+	
 
 	GuiFrame::Draw();
 }
 
 void Taskbar::OnStartButtonClick(GuiButton *sender, int pointer, const POINT &p UNUSED)
 {
-	/*
-	//PopUpMenu *StartMenu = new PopUpMenu(screenwidth/2-width/2-2, Settings.ShowFormatter ? 75 : 105);
-	//StartMenu->AddItem(tr("Apps"), "apps.png", true);
-	//StartMenu->AddItem(tr("Channels"), "channels.png", true);
-	//StartMenu->AddItem(tr("URL List"), "opera_icon.png", true);
-	//StartMenu->AddItem(tr("BootMii"), "BootMii.png");
-	if(Settings.ShowFormatter)
-		StartMenu->AddItem(tr("Formatter"), "usbstorage.png");
-	StartMenu->AddItem(tr("Settings"), "settings.png");
-	//StartMenu->AddItem(tr("FTP Server"), "network.png");
-	StartMenu->AddItem(tr("Remount"), "refresh.png");
-	StartMenu->AddItem(tr("Restart"), "system_restart.png");
-	StartMenu->AddItem(tr("Exit"), "system_log_out.png");
-	StartMenu->Finish();
-	StartMenu->ItemClicked.connect(this, &Taskbar::OnStartmenuItemClick);
 
-	//! Finish update with disabled sender to close opened menus
-	sender->SetState(STATE_DISABLED);
-	Application::Instance()->Update(&userInput[pointer]);
-	sender->SetState(STATE_DEFAULT);
-
-	Application::Instance()->SetUpdateOnly(StartMenu);
-	Application::Instance()->Append(StartMenu);
-	*/
 }
 
 void Taskbar::OnStartmenuItemClick(PopUpMenu *menu, int item)
 {
-	/*
-	if(item >= FORMATTER && !Settings.ShowFormatter)
-		item++;
-
-	if (item == APPS)
-	{
-		PopUpMenu *AppsMenu = new PopUpMenu(0, 0);
-
-		Applications *Apps = new Applications(Settings.HomebrewAppsPath);
-
-		for (int i = 0; i < Apps->Count(); i++)
-			AppsMenu->AddItem(Apps->GetName(i));
-
-		AppsMenu->Finish();
-		AppsMenu->SetUserData(Apps);
-		AppsMenu->ItemClicked.connect(this, &Taskbar::OnAppsMenuClick);
-		menu->OpenSubMenu(item, AppsMenu);
-	}
-	else if (item == CHANNELS)
-	{
-		PopUpMenu *ChannelsMenu = new PopUpMenu(0, 0);
-
-		for (int i = 0; i < Channels::Instance()->Count(); i++)
-			ChannelsMenu->AddItem(Channels::Instance()->GetName(i));
-
-		ChannelsMenu->Finish();
-		ChannelsMenu->ItemClicked.connect(this, &Taskbar::OnChannelsMenuClick);
-		menu->OpenSubMenu(item, ChannelsMenu);
-	}
-	else if (item == URLS)
-	{
-		//PopUpMenu * LinksMenu = new PopUpMenu(0, 0);
-		//OperaBooter *Booter = new OperaBooter(Settings.LinkListPath);
-
-		//LinksMenu->AddItem(tr("Add Link"));
-
-		//for (int i = 0; i < Booter->GetCount(); i++)
-		//{
-		//	const char * name = Booter->GetName(i);
-		//	if(name)
-		//		LinksMenu->AddItem(name);
-		//}
-
-		//LinksMenu->Finish();
-		//LinksMenu->SetUserData(Booter);
-		//LinksMenu->ItemClicked.connect(this, &Taskbar::OnUrlsMenuClick);
-		//menu->OpenSubMenu(item, LinksMenu);
-	}
-	else if (item == BOOTMII)
-	{
-		int res = WindowPrompt(tr("Do you want to start BootMii?"), 0, tr("Yes"), tr("No"));
-		if(res)
-		{
-			ExitApp();
-			if(IOS_ReloadIOS(254) < 0)
-				SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-		}
-	}
-	else if (item == FORMATTER)
-	{
-		PartitionFormatterGui * PartFormatter = new PartitionFormatterGui();
-		PartFormatter->DimBackground(true);
-		PartFormatter->SetAlignment(ALIGN_CENTER | ALIGN_MIDDLE);
-		Application::Instance()->SetUpdateOnly(PartFormatter);
-		Application::Instance()->Append(PartFormatter);
-	}
-	else if (item == SETTINGS)
-	{
-		//! Close main explorer
-		mainExplorer->hide();
-
-		MainSettingsMenu *menu = new MainSettingsMenu(NULL);
-		menu->Closing.connect(this, &Taskbar::OnMenuClosing);
-		Application::Instance()->Append(menu);
-	}
-	/*else if (item == FTPSERVER)
-	{
-		//! Close main explorer
-		mainExplorer->hide();
-
-		if(!NetworkInitPrompt())
-			ShowError(tr("Failed to initialize network."));
-
-		FTPServerMenu * FTPMenu = new FTPServerMenu();
-		FTPMenu->SetAlignment(ALIGN_CENTER | ALIGN_MIDDLE);
-		FTPMenu->SetPosition(0, 30);
-		FTPMenu->Closing.connect(this, &Taskbar::OnMenuClosing);
-
-		Application::Instance()->Append(FTPMenu);
-	} /
-	else if (item == REMOUNT)
-	{
-		if (WindowPrompt(tr("Do you want to remount all devices?"), 0, tr("Yes"), tr("Cancel")))
-		{
-			//! remount closes the USB handle and so we need to stop the external usb keyboard
-			ExternalKeyboard::DestroyInstance();
-			RemountTask *mountTask = new RemountTask(tr("Remounting all devices."), MAXDEVICES);
-			mountTask->SetAutoDelete(true);
-			this->AddTask(mountTask);
-			ThreadedTaskHandler::Instance()->AddTask(mountTask);
-		}
-	}
-	else if (item == RESTART)
-	{
-		if (WindowPrompt(tr("Do you want to reboot WiiXplorer?"), 0, tr("Yes"), tr("Cancel")))
-		{
-			RebootApp();
-		}
-	}
-	else if (item == EXIT)
-	{
-		if (WindowPrompt(tr("Do you want to exit WiiXplorer?"), 0, tr("Yes"), tr("Cancel")))
-		{
-			Application::Instance()->closeRequest();
-		}
-	}
-
-	if(item < 0 || item >= BOOTMII)
-	{
-		if(menu->GetSubMenu())
-		{
-			Application::Instance()->Remove(menu->GetSubMenu());
-			Application::Instance()->PushForDelete(menu->GetSubMenu());
-			menu->GetSubMenu()->SetParent(NULL);
-			menu->CloseSubMenu();
-		}
-		Application::Instance()->PushForDelete(menu);
-	}
-	*/
 }
 
 void Taskbar::OnAppsMenuClick(PopUpMenu *menu, int item)
 {
-	/*
-	PopUpMenu *parent = (PopUpMenu *) menu->GetParent();
-	Applications *Apps = (Applications *) menu->GetUserData();
-	Application::Instance()->Remove(menu);
 
-	if(item >= 0)
-	{
-		Application::Instance()->Remove(parent);
-		Application::Instance()->UnsetUpdateOnly(parent);
-
-		if(WindowPrompt(tr("Do you want to start the app?"), Apps->GetName(item), tr("Yes"), tr("Cancel")))
-			Apps->Launch(item);
-
-		Application::Instance()->PushForDelete(parent);
-		menu->SetParent(NULL);
-	}
-
-	delete Apps;
-	Application::Instance()->PushForDelete(menu);
-	*/
 }
 
 void Taskbar::OnChannelsMenuClick(PopUpMenu *menu, int item)
 {
-	/*
-	PopUpMenu *parent = (PopUpMenu *) menu->GetParent();
-	Application::Instance()->Remove(menu);
 
-	if(item >= 0)
-	{
-		Application::Instance()->Remove(parent);
-		Application::Instance()->UnsetUpdateOnly(parent);
-
-		if(WindowPrompt(tr("Do you want to start the channel?"), Channels::Instance()->GetName(item), tr("Yes"), tr("Cancel")))
-			Channels::Instance()->Launch(item);
-
-		Application::Instance()->PushForDelete(parent);
-		menu->SetParent(NULL);
-	}
-
-	Application::Instance()->PushForDelete(menu);
-	*/
 }
 
 void Taskbar::OnUrlsMenuClick(PopUpMenu *menu, int item)
 {
-	/*
-	PopUpMenu *parent = (PopUpMenu *) menu->GetParent();
-	OperaBooter *Booter = (OperaBooter *) menu->GetUserData();
-	Application::Instance()->Remove(menu);
-
-	if(item >= 0)
-	{
-		Application::Instance()->Remove(parent);
-		Application::Instance()->UnsetUpdateOnly(parent);
-	}
-
-	if(item == 0)
-		Booter->AddLink();
-
-	else if (item > 0)
-	{
-		int res = WindowPrompt(tr("How should this URL be opened?"), Booter->GetLink(item-1), tr("Internet Channel"), tr("Download Link"), tr("Remove Link"), tr("Cancel"));
-		if(res == 1)
-			Booter->Launch(item-1);
-		else if(res == 2)
-			Booter->DownloadFile(item-1);
-		else if(res == 3)
-			Booter->RemoveLink(item-1);
-
-		Application::Instance()->PushForDelete(parent);
-		menu->SetParent(NULL);
-	}
-
-	delete Booter;
-
-	Application::Instance()->PushForDelete(menu);
-	*/
 }
 
 void Taskbar::OnMusicPlayerClick(GuiButton *sender UNUSED, int pointer UNUSED, const POINT &p3 UNUSED)
 {
-	//MusicPlayer::Instance()->Show();
 }
 
 void Taskbar::OnMenuClosing(GuiFrame *menu UNUSED)

@@ -29,9 +29,6 @@
 #include <ogc/machine/processor.h>
 #include <sdcard/wiisd_io.h>
 #include <sdcard/gcsd.h>
-#include "network/SMB.h"
-#include "network/FTPClient.h"
-#include "network/NFS.h"
 #include "mload/usb2storage.h"
 #include "System/IosLoader.h"
 #include "System/isfs.h"
@@ -111,16 +108,6 @@ bool DeviceHandler::Mount(int dev)
 
 	else if(dev >= USB1 && dev <= USB8)
 		return MountUSB(dev-USB1);
-
-	else if(dev >= SMB1 && dev <= SMB10)
-		return ConnectSMBShare(dev-SMB1);
-
-	else if(dev >= FTP1 && dev <= FTP10)
-		return ConnectFTP(dev-FTP1);
-
-	else if(dev >= NFS1 && dev <= NFS10)
-		return ConnectNFS(dev-NFS1);
-
 	else if(dev == NAND)
 		return MountNAND();
 
@@ -144,15 +131,6 @@ bool DeviceHandler::IsInserted(int dev)
 	else if(dev >= USB1 && dev <= USB8)
 		return GetUSBFromDev(dev) && GetUSBFromDev(dev)->IsMounted(PartToPortPart(dev-USB1));
 
-	else if(dev >= SMB1 && dev <= SMB10)
-		return IsSMB_Mounted(dev-SMB1);
-
-	else if(dev >= FTP1 && dev <= FTP10)
-		return IsFTPConnected(dev-FTP1); //later
-
-	else if(dev >= NFS1 && dev <= NFS10)
-		return IsNFS_Mounted(dev-NFS1);
-
 	else if(dev == NAND)
 		return ISFS_IsMounted();
 
@@ -175,15 +153,6 @@ void DeviceHandler::UnMount(int dev)
 
 	else if(dev >= USB1 && dev <= USB8)
 		UnMountUSB(dev-USB1);
-
-	else if(dev >= SMB1 && dev <= SMB10)
-		CloseSMBShare(dev-SMB1);
-
-	else if(dev >= FTP1 && dev <= FTP10)
-		CloseFTP(dev-FTP1);
-
-	else if(dev >= NFS1 && dev <= NFS10)
-		CloseNFS(dev-FTP1);
 
 	else if(dev == NAND)
 		UnMountNAND();

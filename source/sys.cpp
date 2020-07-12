@@ -23,7 +23,6 @@
  *
  * for WiiXplorer 2010
  ***************************************************************************/
-#include "network/networkops.h"
 #include "Prompts/PromptWindows.h"
 #include "Prompts/ProgressWindow.h"
 #include "Controls/Application.h"
@@ -73,7 +72,6 @@ extern "C" void ExitApp()
 	DI2_Close();
 	USB_Deinitialize();
 	ShutdownPads();
-	DeInit_Network();
 	ISFS_Deinitialize();
 	MagicPatches(0);
 }

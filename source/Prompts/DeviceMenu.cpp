@@ -25,7 +25,6 @@
 #include "Controls/Application.h"
 #include "DeviceControls/DeviceHandler.hpp"
 #include "Memory/Resources.h"
-#include "network/networkops.h"
 #include "Settings.h"
 #include "FileOperations/filebrowser.h"
 #include "Prompts/ProgressWindow.h"

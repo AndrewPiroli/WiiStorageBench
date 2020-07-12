@@ -27,7 +27,6 @@
  * for WiiXplorer 2010
  ***************************************************************************/
 #include "GUI/gui_keyboard.h"
-#include "network/networkops.h"
 #include "Prompts/PromptWindows.h"
 #include "Prompts/KeyboardWindow.h"
 #include "Controls/Taskbar.h"
@@ -94,38 +93,7 @@ int OnScreenKeyboard(char * var, u16 maxlen)
 ***************************************************************************/
 bool NetworkInitPrompt()
 {
-	if(IsNetworkInit())
-		return true;
-
-	int choice = -1;
-
-	PromptWindow * Prompt = new PromptWindow(tr("Network initialising..."), tr("Please wait..."), tr("Cancel"));
-	Prompt->DimBackground(true);
-	Application::Instance()->Append(Prompt);
-	Application::Instance()->SetUpdateOnly(Prompt);
-
-	if(!Settings.AutoConnect)
-	{
-		InitNetworkThread();
-		ResumeNetworkThread();
-	}
-
-	while((choice = Prompt->GetChoice()) < 0 && !IsNetworkInit())
-	{
-		Application::Instance()->updateEvents();
-	}
-
-	Prompt->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-	Application::Instance()->PushForDelete(Prompt);
-	Application::Instance()->updateEvents();
-
-	if(!IsNetworkInit())
-	{
-		ShowError(tr("No network connection."));
-		return false;
-	}
-
-	return true;
+			return false;
 }
 
 /****************************************************************************
