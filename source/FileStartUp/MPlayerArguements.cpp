@@ -27,67 +27,11 @@
 #include <stdio.h>
 #include <string.h>
 #include "DeviceControls/DeviceHandler.hpp"
-#include "BootHomebrew/BootHomebrew.h"
 #include "Tools/StringTools.h"
 #include "Settings.h"
 
 void CreateMPlayerArguments(const char * filepath)
 {
-	if(!filepath)
+
 		return;
-
-	char dst[1024];
-
-	if(strncasecmp(filepath, "smb", 3) == 0)
-	{
-		int client = atoi(&filepath[3]);
-		if(client <= 0 || client >= MAXSMBUSERS)
-			return;
-
-		while(filepath[0] != '/' || filepath[1] == '/')
-			filepath++;
-
-		filepath++;
-
-		sprintf(dst, "smb://%s:%s@%s/%s/%s",
-				Settings.SMBUser[client-1].User,
-				Settings.SMBUser[client-1].Password,
-				Settings.SMBUser[client-1].Host,
-				Settings.SMBUser[client-1].SMBName,
-				filepath);
-	}
-	else
-	{
-		int i = 0;
-		char device[10];
-
-		while(filepath[i] != ':')
-		{
-			device[i] = filepath[i];
-			device[i+1] = 0;
-			i++;
-		}
-
-		char * ptr = (char *) &filepath[i];
-
-		while(ptr[0] != '/' || ptr[1] == '/')
-			ptr++;
-
-		if(strncmp(DeviceHandler::PathToFSName(filepath), "NTFS", 4) != 0)
-		{
-			sprintf(dst, "ntfs_usb:%s", ptr);
-		}
-		else if(strncmp(device, "usb", 3) == 0)
-		{
-			sprintf(dst, "usb:%s", ptr);
-		}
-		else
-		{
-			sprintf(dst, "%s:%s", device, ptr);
-		}
-	}
-
-	AddBootArgument(Settings.MPlayerPath);
-	AddBootArgument(dst);
-	AddBootArgument(fmt("−quiet"));
 }

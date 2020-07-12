@@ -27,7 +27,6 @@
 #include "Prompts/PromptWindows.h"
 #include "Prompts/ProgressWindow.h"
 #include "Launcher/Channels.h"
-#include "BootHomebrew/BootHomebrewTask.h"
 #include "Controls/Application.h"
 #include "Controls/Clipboard.h"
 #include "Controls/Taskbar.h"
@@ -48,20 +47,7 @@
 
 extern "C" bool RebootApp()
 {
-	char filepath[MAXPATHLEN];
-
-	if(strlen(Settings.UpdatePath) > 0 && Settings.UpdatePath[strlen(Settings.UpdatePath)-1] != '/')
-		snprintf(filepath, sizeof(filepath), "%s/boot.dol", Settings.UpdatePath);
-	else
-		snprintf(filepath, sizeof(filepath), "%sboot.dol", Settings.UpdatePath);
-
-	ClearArguments();
-	AddBootArgument(filepath);
-
-	BootHomebrewTask *task = new BootHomebrewTask(filepath);
-	task->SetAutoRunOnLoadFinish(true);
-
-	return true;
+		return false;
 }
 
 extern "C" void ExitApp()

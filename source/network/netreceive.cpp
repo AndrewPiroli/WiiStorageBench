@@ -27,7 +27,6 @@
  ***************************************************************************/
  #include <gctypes.h>
 
-#include "BootHomebrew/BootHomebrew.h"
 #include "Language/gettext.h"
 #include "Prompts/PromptWindows.h"
 #include "Controls/Clipboard.h"
@@ -37,36 +36,4 @@
 
 void IncommingConnection(NetReceiver & Receiver)
 {
-	char text[200];
-	snprintf(text, sizeof(text),  tr("Do you want to load file from: %s ?"), Receiver.GetIncommingIP());
-	int choice = WindowPrompt(tr("Incomming connection."), text, tr("Yes"), tr("No"));
-	if(choice)
-	{
-		const u8 * buffer = Receiver.ReceiveData();
-		if(buffer)
-		{
-			choice = WindowPrompt(tr("Do you want to boot file now?"), Receiver.GetFilename(), tr("Yes"), tr("No"));
-			if(choice)
-			{
-				CopyHomebrewMemory((u8*) buffer, 0, Receiver.GetFilesize());
-
-				ItemStruct * Item = new ItemStruct;
-				memset(&Item, 0, sizeof(ItemStruct));
-
-				Item->itempath = strdup("WiiLoad");
-				Item->itemsize = Receiver.GetFilesize();
-				Item->isdir = false;
-
-				Clipboard::Instance()->AddItem(Item);
-
-				if(Item->itempath)
-					free(Item->itempath);
-				delete Item;
-
-				BootHomebrew();
-			}
-		}
-	}
-	Receiver.FreeData();
-	Receiver.CloseConnection();
 }
