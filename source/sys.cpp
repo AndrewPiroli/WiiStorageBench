@@ -143,8 +143,6 @@ extern "C" void Sys_LoadMenu(void)
 {
 	ExitApp();
 
-	if(Settings.OverridePriiloader) {
-
 	/* Return to the Wii system menu */
 	SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 }

@@ -28,21 +28,13 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <malloc.h>
-//#include "SoundOperations/MusicPlayer.h"
 #include "Prompts/PromptWindows.h"
 #include "Prompts/ProgressWindow.h"
 #include "FileStartUp/FileStartUp.h"
 #include "TextOperations/TextEditor.h"
-#include "TextOperations/PDFViewer.hpp"
-#include "TextOperations/FontSystem.h"
 #include "FileOperations/fileops.h"
-#include "ImageOperations/ImageConverterGUI.hpp"
-#include "ImageOperations/ImageViewer.h"
 #include "Controls/Application.h"
-#include "VideoOperations/WiiMovie.hpp"
 #include "FileExtensions.h"
-#include "MPlayerArguements.h"
-#include "WiiMCArguemnts.h"
 #include "Tools/uncompress.h"
 
 int FileStartUp(const char *filepath)

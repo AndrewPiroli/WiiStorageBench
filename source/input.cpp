@@ -7,7 +7,6 @@
  ***************************************************************************/
 #include "stdafx.h"
 #include "Controls/Application.h"
-#include "VideoOperations/video.h"
 #include "ImageOperations/Screenshot.h"
 #include "GUI/gui_trigger.h"
 #include "Settings.h"
