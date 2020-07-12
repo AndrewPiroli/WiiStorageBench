@@ -31,11 +31,8 @@
 #include "Controls/Clipboard.h"
 #include "Controls/Taskbar.h"
 #include "DeviceControls/DeviceHandler.hpp"
-//#include "FTPOperations/FTPServer.h"
 #include "Memory/mem2.h"
 #include "VideoOperations/video.h"
-//#include "SoundOperations/SoundHandler.hpp"
-//#include "SoundOperations/MusicPlayer.h"
 #include "TextOperations/FontSystem.h"
 #include "FileOperations/fileops.h"
 #include "DiskOperations/di2.h"
@@ -67,11 +64,8 @@ extern "C" void ExitApp()
 	Application::Instance()->quit();
 	Clipboard::DestroyInstance();
 	Taskbar::DestroyInstance();
-	//MusicPlayer::DestroyInstance();
 	ProgressWindow::DestroyInstance();
-	//FTPServer::DestroyInstance();
 	Channels::DestroyInstance();
-	//SoundHandler::DestroyInstance();
 	Application::DestroyInstance();
 	Resources::DestroyInstance();
 	DeviceHandler::DestroyInstance();
@@ -150,10 +144,6 @@ extern "C" void Sys_LoadMenu(void)
 	ExitApp();
 
 	if(Settings.OverridePriiloader) {
-		// Priiloader shutup
-	//	*(u32 *)0x8132fffb = 0x50756e65;
-	//	DCFlushRange((u32 *)0x8132fffb, 4);
-	}
 
 	/* Return to the Wii system menu */
 	SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -172,16 +162,8 @@ extern "C" void Sys_BackToLoader(void)
 
 extern "C" bool IsFromHBC()
 {
-	if(!(*((u32*) 0x80001800)))
-		return false;
 
-	char * signature = (char *) 0x80001804;
-	if(strncmp(signature, "STUBHAXX", 8) == 0)
-	{
 		return true;
-	}
-
-	return false;
 }
 
 #define HBC_HAXX	0x0001000148415858LL
