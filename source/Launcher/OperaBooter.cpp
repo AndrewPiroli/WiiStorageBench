@@ -14,6 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
+/*
+
 #include <algorithm>
 #include <ogc/wiilaunch.h>
 #include "Controls/Taskbar.h"
@@ -308,4 +310,6 @@ bool OperaBooter::SortCallback(const Link & f1, const Link & f2)
 		return false;
 	else
 		return true;
-}
+i}
+*/
+

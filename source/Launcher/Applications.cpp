@@ -26,7 +26,7 @@
  * for WiiXplorer 2010
  ***************************************************************************/
 
-#include <mxml.h>
+//#include <mxml.h>
 #include <algorithm>
 
 #include "Applications.h"
@@ -58,13 +58,14 @@ void Applications::Launch(int index)
 	task->SetAutoRunOnLoadFinish(true);
 }
 
-mxml_error_cb_t xmlerror(const char* error UNUSED)
-{
-	return NULL;
-}
+//mxml_error_cb_t xmlerror(const char* error UNUSED)
+//{
+//	return NULL;
+//}
 
 bool Applications::GetNameFromXML(const char *xml, char *name)
 {
+	/*
 	mxml_node_t *tree = NULL;
 	mxml_node_t *data = NULL;
 
@@ -103,8 +104,10 @@ bool Applications::GetNameFromXML(const char *xml, char *name)
 			mxmlDelete(tree);
 		}
 	}
-
+	
 	return ret;
+	*/
+	return NULL;
 }
 
 void Applications::Reload()

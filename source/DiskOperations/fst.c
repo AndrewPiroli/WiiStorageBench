@@ -365,7 +365,7 @@ static off_t _FST_seek_r(struct _reent *r, int fd, off_t pos, int dir) {
 	return position;
 }
 
-static void stat_entry(DIR_ENTRY *entry, struct stat *st) {
+static void stat_entry(DIR_ENTRY *entry, struct stat *st) {/*
 	st->st_dev = 0x4657;
 	st->st_ino = 0;
 	st->st_mode = ((is_dir(entry)) ? S_IFDIR : S_IFREG) | (S_IRUSR | S_IRGRP | S_IROTH);
@@ -384,6 +384,7 @@ static void stat_entry(DIR_ENTRY *entry, struct stat *st) {
 	st->st_blocks = (entry->size + SECTOR_SIZE - 1) / SECTOR_SIZE;
 	st->st_spare4[0] = 0;
 	st->st_spare4[1] = 0;
+	*/
 }
 
 static int _FST_fstat_r(struct _reent *r, int fd, struct stat *st) {

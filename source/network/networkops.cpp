@@ -31,7 +31,7 @@
 #include <ogcsys.h>
 #include <ogc/machine/processor.h>
 
-#include "FTPOperations/FTPServer.h"
+//#include "FTPOperations/FTPServer.h"
 #include "http.h"
 #include "networkops.h"
 #include "netreceiver.h"
@@ -51,7 +51,7 @@ static bool exitRequested = false;
  * Initialize_Network
  ***************************************************************************/
 void Initialize_Network(void)
-{
+{/*
 	if(networkinit)
 		return;
 
@@ -65,6 +65,8 @@ void Initialize_Network(void)
 	}
 
 	networkinit = true;
+	return;*/
+	networkinit = false;
 	return;
 }
 
@@ -133,11 +135,11 @@ static void * networkinitcallback(void *arg UNUSED)
 
 		if(!firstRun)
 		{
-			ConnectSMBShare();
-			ConnectFTP();
-			ConnectNFS();
-			if(Settings.FTPServer.AutoStart)
-				FTPServer::Instance()->StartupFTP();
+			//ConnectSMBShare();
+			//ConnectFTP();
+			//ConnectNFS();
+			//if(Settings.FTPServer.AutoStart)
+			//	FTPServer::Instance()->StartupFTP();
 
 			UpdateTask updateTask(true, false, true);
 			updateTask.CheckForUpdate();

@@ -36,6 +36,11 @@
 
 #define MAX_PARSE_ITEMS	(20)
 
+//?????
+#define stricmp strcasecmp
+#define strnicmp strncasecmp
+//?????
+
 /****************************************************************************
  * FileBrowser Class to parse directories on the fly
  ***************************************************************************/

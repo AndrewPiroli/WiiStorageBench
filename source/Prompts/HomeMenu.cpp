@@ -19,7 +19,7 @@
 #include "HomeMenu.h"
 #include "Controls/Application.h"
 #include "Prompts/PromptWindows.h"
-#include "SoundOperations/MusicPlayer.h"
+//#include "SoundOperations/MusicPlayer.h"
 #include "Memory/Resources.h"
 #include "sys.h"
 
@@ -166,21 +166,21 @@ HomeMenu::HomeMenu()
 		Append(BatteryBtn[i]);
 	}
 
-	if(!MusicPlayer::Instance()->IsStopped())
-		MusicPlayer::Instance()->Pause();
+	//if(!MusicPlayer::Instance()->IsStopped())
+	//	MusicPlayer::Instance()->Pause();
 
 	// play home sound
-	HomeInSnd->Play();
+	//HomeInSnd->Play();
 }
 
 HomeMenu::~HomeMenu()
 {
 	RemoveAll();
 
-	HomeOutSnd->Stop();
+	//HomeOutSnd->Stop();
 
-	if(!MusicPlayer::Instance()->IsStopped())
-		MusicPlayer::Instance()->Resume();
+	//if(!MusicPlayer::Instance()->IsStopped())
+	//	MusicPlayer::Instance()->Resume();
 
 	delete WiimoteBtn;
 	delete ShutdownBtn;
@@ -263,8 +263,8 @@ void HomeMenu::OnButtonClick(GuiButton *sender, int pointer UNUSED, const POINT 
 {
 	if(sender == TopBtn || sender == BottomBtn)
 	{
-		HomeInSnd->Stop();
-		HomeOutSnd->Play();
+		//HomeInSnd->Stop();
+		//HomeOutSnd->Play();
 		this->hide();
 
 		Application::Instance()->PushForDelete(this);

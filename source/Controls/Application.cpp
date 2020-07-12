@@ -1,4 +1,4 @@
-/****************************************************************************
+/***************************************************************************
  * Copyright (C) 2009-2011 Dimok
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,17 +17,17 @@
 #include "Application.h"
 #include "Menus/Explorer.h"
 #include "DiskOperations/di2.h"
-#include "SoundOperations/MusicPlayer.h"
+//#include "SoundOperations/MusicPlayer.h"
 #include "Memory/Resources.h"
 #include "Controls/Taskbar.h"
 #include "network/networkops.h"
 #include "DeviceControls/DeviceHandler.hpp"
 #include "TextOperations/FontSystem.h"
-#include "FTPOperations/FTPServer.h"
+//#include "FTPOperations/FTPServer.h"
 #include "Prompts/HomeMenu.h"
 #include "Prompts/ProgressWindow.h"
 #include "Prompts/ThrobberWindow.h"
-#include "SoundOperations/SoundHandler.hpp"
+//#include "SoundOperations/SoundHandler.hpp"
 #include "Settings.h"
 #include "VideoOperations/video.h"
 #include "ThreadedTaskHandler.hpp"
@@ -100,7 +100,7 @@ void Application::hide()
 void Application::show()
 {
 	Append(bgImg);
-	Append(MusicPlayer::Instance());
+	//Append(MusicPlayer::Instance());
 	Append(ProgressWindow::Instance());
 	//! Append taskbar instance
 	Append(Taskbar::Instance());
@@ -267,7 +267,7 @@ void Application::init(void)
 	this->SetSize(screenwidth, screenheight);
 	bgImg->SetSize(screenwidth, screenheight);
 	//! Temporary prompt window to notify the user about the loading process
-	ThrobberWindow window("Initializing...", "Mounting devices");
+	ThrobberWindow window("Initializing...", "Original code by Dimok. Modified by Andrew Piroli");
 	window.SetParent(this);
 	bool effectStop = false;
 	while(!effectStop)
@@ -295,14 +295,14 @@ void Application::init(void)
 	if(Settings.EntraceIOS != Settings.BootIOS)
 	{
 		//! notify user that we are about to reload IOS
-		window.SetMessage(fmt("Reloading into IOS %i", Settings.BootIOS));
+		//window.SetMessage(fmt("Reloading into IOS %i", Settings.BootIOS));
 		//! render prompt
-		bgImg->Draw();
-		window.Draw();
-		Menu_Render();
+		//bgImg->Draw();
+		//window.Draw();
+		//Menu_Render();
 
 		//! load IOS
-		IosLoader::ReloadAppIos(Settings.BootIOS);
+		//IosLoader::ReloadAppIos(Settings.BootIOS);
 
 		//! if settings were not loaded before, reloading here again.
 		if(!bSettingsLoaded)
@@ -326,7 +326,7 @@ void Application::init(void)
 	DeviceHandler::Instance()->MountGCB();
 	DeviceHandler::Instance()->MountNAND();
 	Settings.LoadLanguage(Settings.LanguagePath);
-	SetupPDFFontPath(Settings.UpdatePath);
+	//SetupPDFFontPath(Settings.UpdatePath);
 	SetupDefaultFont(Settings.CustomFontPath);
 
 	//! Set UTF 8 locale
@@ -337,18 +337,18 @@ void Application::init(void)
 	LWP_SetThreadPriority(LWP_GetSelf(), 121);
 
 	//! Initialize sound handler thread
-	SoundHandler::Instance();
+	//SoundHandler::Instance();
 
 	//! Initialize network thread if selected
-	if(Settings.AutoConnect)
+	if(false)//Settings.AutoConnect)
 	{
-		InitNetworkThread();
-		ResumeNetworkThread();
+		//InitNetworkThread();
+		//ResumeNetworkThread();
 	}
 
 	//! FTP Server thread
-	if(Settings.FTPServer.AutoStart)
-		FTPServer::Instance()->StartupFTP();
+	//if(Settings.FTPServer.AutoStart)
+	//	FTPServer::Instance()->StartupFTP();
 
 	//! Initialize the task thread
 	ThreadedTaskHandler::Instance()->setThreadPriority(Settings.CopyThreadPrio);
@@ -364,10 +364,10 @@ void Application::init(void)
 	bgColor[3] = RGBATOGXCOLOR(Settings.BackgroundBL);
 
 	//! Setup the music player
-	MusicPlayer::Instance()->SetVolume(Settings.MusicVolume);
-	MusicPlayer::Instance()->SetLoop(Settings.BGMLoopMode);
-	MusicPlayer::Instance()->SetAlignment(ALIGN_RIGHT | ALIGN_TOP);
-	MusicPlayer::Instance()->SetPosition(30, 230);
+	//MusicPlayer::Instance()->SetVolume(Settings.MusicVolume);
+	//MusicPlayer::Instance()->SetLoop(Settings.BGMLoopMode);
+	//MusicPlayer::Instance()->SetAlignment(ALIGN_RIGHT | ALIGN_TOP);
+	//MusicPlayer::Instance()->SetPosition(30, 230);
 
 	//! Fade window out
 	window.SetEffect(EFFECT_FADE, -20);

@@ -82,12 +82,12 @@ void GuiImageData::LoadImage(const u8 *img, int imgSize)
 	else if (img[0] == 0x49 && img[1] == 0x49)
 	{
 		// IMAGE_TIFF_PC
-		gdImg = gdImageCreateFromTiffPtr(imgSize, (u8*) img);
+		gdImg = NULL;//gdImageCreateFromTiffPtr(imgSize, (u8*) img);
 	}
 	else if (img[0] == 0x4D && img[1] == 0x4D)
 	{
 		// IMAGE_TIFF_MAC
-		gdImg = gdImageCreateFromTiffPtr(imgSize, (u8*) img);
+		gdImg = NULL;//gdImageCreateFromTiffPtr(imgSize, (u8*) img);
 	}
 	else if (img[0] == 'B' && img[1] == 'M')
 	{

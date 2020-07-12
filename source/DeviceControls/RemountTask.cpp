@@ -17,7 +17,7 @@
 #include "RemountTask.h"
 #include "DeviceControls/DeviceHandler.hpp"
 #include "Controls/Application.h"
-#include "SoundOperations/MusicPlayer.h"
+//#include "SoundOperations/MusicPlayer.h"
 #include "Prompts/ProgressWindow.h"
 
 RemountTask::RemountTask(const char *title, int Device)
@@ -41,7 +41,7 @@ void RemountTask::Execute(void)
 		// update progress information
 		ProgressWindow::Instance()->ShowProgress(0, MAXDEVICES);
 
-		MusicPlayer::Instance()->Pause();
+		//MusicPlayer::Instance()->Pause();
 
 		DeviceHandler::DestroyInstance();
 		DeviceHandler::Instance()->USBSpinUp(10);
@@ -55,7 +55,7 @@ void RemountTask::Execute(void)
 			DeviceHandler::Instance()->Mount(dev);
 		}
 
-		MusicPlayer::Instance()->Resume();
+		//MusicPlayer::Instance()->Resume();
 	}
 	else
 	{

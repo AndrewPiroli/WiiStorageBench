@@ -33,6 +33,7 @@
 #include "networkops.h"
 #include "URL_List.h"
 
+#define stricmp strcasecmp
 
 URL_List::URL_List(const char * url)
 {

@@ -26,7 +26,7 @@
 #include <gccore.h>
 #include <fat.h>
 #include <ntfs.h>
-#include <ext2.h>
+//#include <ext2.h>
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
@@ -139,14 +139,14 @@ bool PartitionHandle::Mount(int pos, const char * name)
 		}
 	}
 
-	if(strncmp(GetFSName(pos), "LINUX", 5) == 0 || strcmp(GetFSName(pos), "GUID-Entry") == 0)
-	{
-		if(ext2Mount(MountNameList[pos].c_str(), interface, GetLBAStart(pos), CACHE, SECTORS, EXT2_FLAG_DEFAULT))
-		{
-			PartitionList[pos].FSName = "LINUX";
-			return true;
-		}
-	}
+	//if(strncmp(GetFSName(pos), "LINUX", 5) == 0 || strcmp(GetFSName(pos), "GUID-Entry") == 0)
+	//{
+	//	if(ext2Mount(MountNameList[pos].c_str(), interface, GetLBAStart(pos), CACHE, SECTORS, EXT2_FLAG_DEFAULT))
+	//	{
+	//		PartitionList[pos].FSName = "LINUX";
+	//		return true;
+	//	}
+	//}
 	MountNameList[pos].clear();
 
 	return false;
@@ -171,7 +171,7 @@ void PartitionHandle::UnMount(int pos)
 	//closing all open Files write back the cache
 	ntfsUnmount(DeviceName, true);
 	//closing all open Files write back the cache
-	ext2Unmount(DeviceName);
+	//ext2Unmount(DeviceName);
 	//Remove name from list
 	MountNameList[pos].clear();
 }

@@ -93,7 +93,7 @@ void GuiLongText::SetTextPos(int pos)
 
 	for(u32 i = 0; i < TextLines.size(); i++)
 	{
-		int curDiff = abs(TextLines[i] - pos);
+		int curDiff = abs((long)(TextLines[i] - pos));
 		if(curDiff < diff)
 		{
 			diff = curDiff;

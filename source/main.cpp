@@ -32,7 +32,7 @@
 
 int main(int argc UNUSED, char *argv[] UNUSED)
 {
-	__exception_setreload(30);
+	__exception_setreload(1);
 	// Initialize video before anything else as otherwise green stripes are produced, need to figure out why...
 	InitVideo();
 

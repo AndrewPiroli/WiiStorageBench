@@ -24,6 +24,8 @@
 #include "Controls/Application.h"
 #include "FileOperations/fileops.h"
 
+#include <sys/param.h>
+
 bool sizegainrunning = false;
 
 Properties::Properties(ItemMarker * IMarker)

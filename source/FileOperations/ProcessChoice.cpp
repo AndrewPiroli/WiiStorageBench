@@ -31,59 +31,59 @@
 #include "FileOperations/MoveTask.h"
 #include "FileOperations/DeleteTask.h"
 #include "FileOperations/MD5Task.h"
-#include "FileOperations/PackTask.h"
-#include "FileOperations/UnpackTask.h"
 
 void Explorer::ProcessArcChoice(int choice, const char * destCandidat)
 {
-	ArchiveBrowser * browser = (ArchiveBrowser *) curBrowser;
-	if(!browser)
+	return;
+	/*
+	//ArchiveBrowser * browser = (ArchiveBrowser *) curBrowser;
+	//if(!browser)
 		return;
 
-	if(choice == ArcPasteItems)
-	{
-		int ret = WindowPrompt(tr("Paste the item(s) into this directory?"), Clipboard::Instance()->GetItemName(Clipboard::Instance()->GetItemcount()-1), tr("Yes"), tr("Cancel"));
-		if(ret <= 0)
+	//if(choice == ArcPasteItems)
+	//{
+		//int ret = WindowPrompt(tr("Paste the item(s) into this directory?"), Clipboard::Instance()->GetItemName(Clipboard::Instance()->GetItemcount()-1), tr("Yes"), tr("Cancel"));
+		//if(ret <= 0)
 			return;
 
-		PackTask *task = new PackTask(Clipboard::Instance(), browser->GetCurrentPath(), browser->GetArchive(), Settings.CompressionLevel);
-		task->TaskEnd.connect(this, &Explorer::OnFinishedTask);
-		this->explorerTasks++;
-		Taskbar::Instance()->AddTask(task);
-		ThreadedTaskHandler::Instance()->AddTask(task);
+		//PackTask *task = new PackTask(Clipboard::Instance(), browser->GetCurrentPath(), browser->GetArchive(), Settings.CompressionLevel);
+		//task->TaskEnd.connect(this, &Explorer::OnFinishedTask);
+		//this->explorerTasks++;
+		//Taskbar::Instance()->AddTask(task);
+		//ThreadedTaskHandler::Instance()->AddTask(task);
 
-		Clipboard::Instance()->Reset();
-	}
+		//Clipboard::Instance()->Reset();
+	//}
 
-	else if(choice == ArcExtractFile)
-	{
-		int ret = WindowPrompt(tr("Extract the selected item(s)?"), browser->GetCurrentName(), tr("Yes"), tr("Cancel"));
-		if(ret <= 0)
+	//else if(choice == ArcExtractFile)
+	//{
+		//int ret = WindowPrompt(tr("Extract the selected item(s)?"), browser->GetCurrentName(), tr("Yes"), tr("Cancel"));
+		//if(ret <= 0)
 			return;
 
-		char dest[MAXPATHLEN];
-		snprintf(dest, sizeof(dest), "%s", destCandidat);
+		//char dest[MAXPATHLEN];
+		//snprintf(dest, sizeof(dest), "%s", destCandidat);
 
-		int result = OnScreenKeyboard(dest, sizeof(dest));
-		if(result)
-		{
+		//int result = OnScreenKeyboard(dest, sizeof(dest));
+		//if(result)
+		//{
 			//append selected Item
-			browser->MarkCurrentItem();
+		//	browser->MarkCurrentItem();
 			//Get ItemMarker
-			ItemMarker * IMarker = browser->GetItemMarker();
+		//	ItemMarker * IMarker = browser->GetItemMarker();
 			//switch between browser index and archive file index
-			for(int i = 0; i < IMarker->GetItemcount(); i++)
-				IMarker->GetItem(i)->itemindex = browser->GetItemStructure(IMarker->GetItem(i)->itemindex)->fileindex;
+		//	for(int i = 0; i < IMarker->GetItemcount(); i++)
+		//		IMarker->GetItem(i)->itemindex = browser->GetItemStructure(IMarker->GetItem(i)->itemindex)->fileindex;
 
-			UnpackTask *task = new UnpackTask(IMarker, dest, browser->GetArchive(), false);
-			task->TaskEnd.connect(this, &Explorer::OnFinishedTask);
-			this->explorerTasks++;
-			Taskbar::Instance()->AddTask(task);
-			ThreadedTaskHandler::Instance()->AddTask(task);
+		//	UnpackTask *task = new UnpackTask(IMarker, dest, browser->GetArchive(), false);
+		//	task->TaskEnd.connect(this, &Explorer::OnFinishedTask);
+		//	this->explorerTasks++;
+		//	Taskbar::Instance()->AddTask(task);
+		//	ThreadedTaskHandler::Instance()->AddTask(task);
 
-			IMarker->Reset();
-		}
-	}
+		//	IMarker->Reset();
+		//}
+	//}
 	else if(choice == ArcExtractAll)
 	{
 		int ret = WindowPrompt(tr("Extract full archive?"), 0, tr("Yes"), tr("Cancel"));
@@ -126,7 +126,7 @@ void Explorer::ProcessArcChoice(int choice, const char * destCandidat)
 		Application::Instance()->Append(Prompt);
 
 		Marker->Reset();
-	}
+	}*/
 }
 
 void Explorer::ProcessChoice(int choice)
@@ -134,27 +134,28 @@ void Explorer::ProcessChoice(int choice)
 	FileBrowser * browser = (FileBrowser *) curBrowser;
 	if(!browser)
 		return;
-
-	else if(browser->GetCurrentFilename() && strcmp(browser->GetCurrentFilename(),"..") != 0)
+	/*
+	if(browser->GetCurrentFilename() && strcmp(browser->GetCurrentFilename(),"..") != 0)
 	{
-		if(choice == CUT)
-		{
-			choice = WindowPrompt(browser->GetCurrentFilename(), tr("Cut current marked item(s)?"), tr("Yes"), tr("Cancel"));
-			if(choice == 1)
-			{
-				Clipboard::Instance()->Reset();
-				//append selected Item
-				browser->MarkCurrentItem();
-				//Get ItemMarker
-				ItemMarker * IMarker = browser->GetItemMarker();
-
-				for(int i = 0; i < IMarker->GetItemcount(); i++)
-					Clipboard::Instance()->AddItem(IMarker->GetItem(i));
-
-				IMarker->Reset();
-				Clipboard::Instance()->Operation = OP_MOVE;
-			}
-		}
+		
+		//if(choice == CUT)
+		//{
+		//	choice = WindowPrompt(browser->GetCurrentFilename(), tr("Cut current marked item(s)?"), tr("Yes"), tr("Cancel"));
+		//	if(choice == 1)
+		//	{
+		//		Clipboard::Instance()->Reset();
+		//		//append selected Item
+		//		browser->MarkCurrentItem();
+		//		//Get ItemMarker
+		//		ItemMarker * IMarker = browser->GetItemMarker();
+//
+		//		for(int i = 0; i < IMarker->GetItemcount(); i++)
+		//			Clipboard::Instance()->AddItem(IMarker->GetItem(i));
+//
+		//		IMarker->Reset();
+		//		Clipboard::Instance()->Operation = OP_MOVE;
+		//	}
+		//}
 
 		else if(choice == COPY)
 		{
@@ -221,7 +222,7 @@ void Explorer::ProcessChoice(int choice)
 	}
 	else if(choice >= 0 && choice != PASTE && choice != NEWFOLDER && choice != PROPERTIES)
 		WindowPrompt(tr("You cant use this operation on:"), tr("Directory .."), tr("OK"));
-
+	
 	if(choice == PASTE)
 	{
 		choice = WindowPrompt(Clipboard::Instance()->GetItemName(Clipboard::Instance()->GetItemcount()-1), tr("Paste item(s) into current directory?"), tr("Yes"), tr("Cancel"));
@@ -291,8 +292,8 @@ void Explorer::ProcessChoice(int choice)
 		//! Update browser
 		IMarker->Reset();
 	}
-
-	else if(choice == CHECK_MD5)
+	*/
+	if(choice == CHECK_MD5)
 	{
 		int md5Choice = 1;
 
@@ -313,7 +314,7 @@ void Explorer::ProcessChoice(int choice)
 			browser->GetItemMarker()->Reset();
 		}
 	}
-
+	/*
 	else if(choice == NEWFOLDER)
 	{
 		char entered[151];
@@ -331,7 +332,8 @@ void Explorer::ProcessChoice(int choice)
 			guiBrowser->Refresh();
 		}
 	}
-	else if(choice == PROPERTIES)
+	*/
+	if(choice == PROPERTIES)
 	{
 		browser->MarkCurrentItem();
 		ItemMarker * Marker = browser->GetItemMarker();

@@ -19,7 +19,7 @@
 #include "Controls/Application.h"
 #include "WiiMovie.hpp"
 #include "ImageOperations/TextureConverter.h"
-#include "SoundOperations/MusicPlayer.h"
+//#include "SoundOperations/MusicPlayer.h"
 #include "VideoOperations/video.h"
 
 static BufferCircle * soundbuffer = NULL;
@@ -50,7 +50,7 @@ WiiMovie::WiiMovie(const char * filepath)
 	exitBtn->SetTrigger(trigB);
 	exitBtn->Clicked.connect(this, &WiiMovie::OnExitClick);
 
-	MusicPlayer::Instance()->Pause();
+	//MusicPlayer::Instance()->Pause();
 
 	string file(filepath);
 	Video = openVideo(file);
@@ -97,8 +97,8 @@ WiiMovie::~WiiMovie()
 	Playing = false;
 	ExitRequested = true;
 
-	ASND_StopVoice(0);
-	MusicPlayer::Instance()->Resume();
+	//ASND_StopVoice(0);
+	//MusicPlayer::Instance()->Resume();
 
 	if(ReadThread != LWP_THREAD_NULL)
 	{

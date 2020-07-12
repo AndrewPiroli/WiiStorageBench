@@ -28,6 +28,7 @@
  * Directory parsing Class
  * for WiiXplorer 2009
  ***************************************************************************/
+#include <sys/param.h>
 #ifndef _FILEBROWSER_H_
 #define _FILEBROWSER_H_
 

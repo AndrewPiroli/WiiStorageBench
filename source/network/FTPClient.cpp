@@ -28,13 +28,13 @@
 #include <ogcsys.h>
 #include <string.h>
 #include "network/networkops.h"
-#include "FTPOperations/ftp_devoptab.h"
+//#include "FTPOperations/ftp_devoptab.h"
 #include "Settings.h"
 
 static bool ftpReady = false;
 
 bool ConnectFTP(int client)
-{
+{/*
 	if(client < 0 || client >= MAXFTPUSERS)
 		return false;
 
@@ -72,13 +72,16 @@ bool ConnectFTP(int client)
 	}
 
 	return result;
+	*/
+	return false;
 }
 
 /****************************************************************************
  * FTP Stuff
  ***************************************************************************/
 bool ConnectFTP()
-{
+{return false;
+	/*
 	if(!IsNetworkInit())
 		Initialize_Network();
 
@@ -86,20 +89,24 @@ bool ConnectFTP()
 		ConnectFTP(i);
 
 	return ftpReady;
+	*/
 }
 
 void CloseFTP()
 {
+	/*
 	for (int i = 0; i < MAXFTPUSERS; i++)
 	{
 		char name[10];
 		sprintf(name, "ftp%i", i+1);
 		ftpClose(name);
 	}
+	*/
 }
 
 void CloseFTP(int client)
 {
+	/*
 	if (client < 0 || client >= MAXFTPUSERS || !ftpReady)
 		return;
 
@@ -109,10 +116,13 @@ void CloseFTP(int client)
 	char name[10];
 	sprintf(name, "ftp%i", client+1);
 	ftpClose(name);
+	*/
 }
 
 bool IsFTPConnected(int ftp)
 {
+	return false;
+	/*
 	if (ftp < 0 || ftp >= MAXFTPUSERS || !ftpReady)
 		return false;
 
@@ -120,4 +130,5 @@ bool IsFTPConnected(int ftp)
 	sprintf(name, "ftp%i", ftp+1);
 
 	return CheckFTPConnection(name);
+	*/
 }

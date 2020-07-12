@@ -84,7 +84,7 @@ bool SetupDefaultFont(const char *path)
 		fclose(pfile);
 	}
 
-	SetupPDFFallbackFont(MainFont, MainFontSize);
+	//SetupPDFFallbackFont(MainFont, MainFontSize);
 
 	fontSystem = new FreeTypeGX(MainFont, MainFontSize);
 

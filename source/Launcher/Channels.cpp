@@ -42,6 +42,8 @@
 #include "Tools/tools.h"
 #include "sys.h"
 
+#define stricmp strcasecmp
+
 #define IMET_OFFSET			0x40
 #define IMET_SIGNATURE		0x494d4554
 #define DOWNLOADED_CHANNELS	0x00010001

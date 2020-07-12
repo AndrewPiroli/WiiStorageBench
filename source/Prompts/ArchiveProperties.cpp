@@ -25,7 +25,7 @@
  *
  * for WiiXplorer 2009
  ***************************************************************************/
-
+/*
 #include <sys/statvfs.h>
 #include <string.h>
 #include <dirent.h>
@@ -298,3 +298,4 @@ void ArchiveProperties::OnButtonClick(GuiButton *sender UNUSED, int pointer UNUS
 	SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 40);
 	Application::Instance()->PushForDelete(this);
 }
+*/

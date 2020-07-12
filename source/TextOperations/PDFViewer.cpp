@@ -23,6 +23,7 @@
  *
  * for WiiXplorer 2010
  ***************************************************************************/
+/*
 #include <gccore.h>
 #include <malloc.h>
 #include "Controls/Application.h"
@@ -290,4 +291,4 @@ int PDFViewer::PageToTexture()
 	}
 
 	return len;
-}
+}*/

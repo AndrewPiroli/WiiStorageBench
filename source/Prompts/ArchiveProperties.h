@@ -27,7 +27,7 @@
  ***************************************************************************/
  #ifndef __ARCHIVEPROPERTIES_H_
  #define __ARCHIVEPROPERTIES_H_
-
+/*
 #include "GUI/gui.h"
 #include "ArchiveOperations/ArchiveBrowser.h"
 #include "Memory/Resources.h"
@@ -70,5 +70,5 @@ class ArchiveProperties : public GuiFrame, public sigslot::has_slots<>
 		SimpleGuiTrigger * trigA;
 		GuiTrigger * trigB;
 };
-
+*/
 #endif

@@ -28,7 +28,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <malloc.h>
-#include "SoundOperations/MusicPlayer.h"
+//#include "SoundOperations/MusicPlayer.h"
 #include "Prompts/PromptWindows.h"
 #include "Prompts/ProgressWindow.h"
 #include "BootHomebrew/BootHomebrewTask.h"
@@ -76,10 +76,10 @@ int FileStartUp(const char *filepath)
 		int choice = WindowPrompt(filename, tr("Open the file in the PDF Viewer?"), tr("Yes"), tr("Cancel"));
 		if (choice == 1)
 		{
-			PDFViewer * Viewer = new PDFViewer(filepath);
-			Viewer->SetAlignment(ALIGN_CENTER | ALIGN_MIDDLE);
-			Application::Instance()->SetUpdateOnly(Viewer);
-			Application::Instance()->Append(Viewer);
+			//PDFViewer * Viewer = new PDFViewer(filepath);
+			//Viewer->SetAlignment(ALIGN_CENTER | ALIGN_MIDDLE);
+			//Application::Instance()->SetUpdateOnly(Viewer);
+			//Application::Instance()->Append(Viewer);
 		}
 	}
 	else if(Settings.FileExtensions.CompareImage(fileext) == 0)
@@ -108,19 +108,19 @@ int FileStartUp(const char *filepath)
 		int choice = WindowPrompt(filename, tr("Do you want to playback this file?"), tr("Yes"), tr("Add to Playlist"), tr("Parse Directory"), tr("Cancel"));
 		if(choice == 1)
 		{
-			MusicPlayer::Instance()->ClearList();
-			MusicPlayer::Instance()->AddEntrie(filepath);
-			if(!MusicPlayer::Instance()->Play(0))
-				WindowPrompt(tr("Could not load file."), tr("Possible unsupported format."), tr("OK"));
+			//MusicPlayer::Instance()->ClearList();
+			//MusicPlayer::Instance()->AddEntrie(filepath);
+			//if(!MusicPlayer::Instance()->Play(0))
+			//	WindowPrompt(tr("Could not load file."), tr("Possible unsupported format."), tr("OK"));
 		}
 		else if(choice == 2)
 		{
-			MusicPlayer::Instance()->AddEntrie(filepath);
+			//MusicPlayer::Instance()->AddEntrie(filepath);
 		}
 		else if(choice == 3)
 		{
-			bool result = MusicPlayer::Instance()->ParsePath(filepath);
-			if(!result)
+			//bool result = MusicPlayer::Instance()->ParsePath(filepath);
+			//if(!result)
 				ShowError(tr("Could not parse directory."));
 		}
 	}

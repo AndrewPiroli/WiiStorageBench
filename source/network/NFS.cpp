@@ -27,20 +27,20 @@
 #include <string.h>
 #include <ogcsys.h>
 #include <unistd.h>
-#include <nfs.h>
+//#include <nfs.h>
 #include "Tools/StringTools.h"
 #include "network/networkops.h"
 #include "Settings.h"
 
-static bool NFS_Mounted[MAXNFSUSERS];
-static bool firstNFSRun = true;
+//static bool NFS_Mounted[MAXNFSUSERS];
+//static bool firstNFSRun = true;
 
 /****************************************************************************
  * Mount one NFS Mountpoint 
  ****************************************************************************/
 bool ConnectNFS(int client)
 {
-	if(client < 0)
+/*	if(client < 0)
 		return false;
 
 	if(firstNFSRun)
@@ -72,14 +72,15 @@ bool ConnectNFS(int client)
 		}
 	}
 
-	return result;
+	return result;*/
+	return false;
 }
 
 /****************************************************************************
  * Mount NFS Mountpoints 
  ****************************************************************************/
 bool ConnectNFS()
-{
+{/*
 	bool result = false;
 
 	for(int i = 0; i < MAXNFSUSERS; i++)
@@ -88,25 +89,27 @@ bool ConnectNFS()
 			result = true;
 	}
 
-	return result;
+	return result;*/
+	return false;
 }
 
 /****************************************************************************
  * IsNFS_Mounted
  ***************************************************************************/
 bool IsNFS_Mounted(int nfs)
-{
+{/*
 	if(nfs < 0 || nfs >= MAXSMBUSERS)
 		return false;
 
-	return NFS_Mounted[nfs];
+	return NFS_Mounted[nfs];*/
+	return false;
 }
 
 /****************************************************************************
  * Close NFS Mountpoint 
  ****************************************************************************/
 void CloseNFS(int connection)
-{
+{/*
 	if(connection < 0 || connection >= MAXNFSUSERS)
 		return;
 
@@ -117,23 +120,24 @@ void CloseNFS(int connection)
 		nfsUnmount(mountname);
 
 	NFS_Mounted[connection] = false;
+	*/
 }
 
 void CloseNFS()
-{
+{/*
 	for(int i = 0; i < MAXNFSUSERS; i++)
 	{
 		CloseNFS(i);
-	}
+	}*/
 }
 
 /****************************************************************************
  * Reconnect NFS Connection
  ****************************************************************************/
 bool NFS_Reconnect()
-{
+{/*
 	CloseNFS();
 	usleep(200000);
-	return ConnectNFS();
+	return ConnectNFS();*/
 }
 

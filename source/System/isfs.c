@@ -232,6 +232,7 @@ static void setCurrent(DIR_ENTRY *entry)
 
 static void stat_entry(DIR_ENTRY *entry, struct stat *st)
 {
+	/*
 	if(!entry || !st)
 		return;
 
@@ -254,6 +255,7 @@ static void stat_entry(DIR_ENTRY *entry, struct stat *st)
 	st->st_blocks = (entry->size + SECTOR_SIZE - 1) / SECTOR_SIZE;
 	st->st_spare4[0] = 0;
 	st->st_spare4[1] = 0;
+	*/
 }
 
 static int _ISFS_open_r(struct _reent *r, void *fileStruct, const char *path, int flags, int mode) {
@@ -451,6 +453,7 @@ static int _ISFS_fstat_r(struct _reent *r, int fd, struct stat *st) {
 		return -1;
 	}
 	time_t t = time(0);
+	/*
 	st->st_dev = DEV_ID;
 	st->st_ino = 0;
 	st->st_mode = S_IFREG | (S_IRUSR | S_IRGRP | S_IROTH);
@@ -469,6 +472,7 @@ static int _ISFS_fstat_r(struct _reent *r, int fd, struct stat *st) {
 	st->st_blocks = (file->size + SECTOR_SIZE - 1) / SECTOR_SIZE;
 	st->st_spare4[0] = 0;
 	st->st_spare4[1] = 0;
+	*/
 	return 0;
 }
 
@@ -526,7 +530,7 @@ static int _ISFS_stat_r(struct _reent *r, const char *path, struct stat *st) {
 	}
 
 	free(abspath);
-
+/*
 	time_t t = time(0);
 	st->st_dev = DEV_ID;
 	st->st_ino = 0;
@@ -546,7 +550,7 @@ static int _ISFS_stat_r(struct _reent *r, const char *path, struct stat *st) {
 	st->st_blocks = (size + SECTOR_SIZE - 1) / SECTOR_SIZE;
 	st->st_spare4[0] = 0;
 	st->st_spare4[1] = 0;
-
+*/
 	return 0;
 }
 

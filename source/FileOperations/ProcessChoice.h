@@ -40,13 +40,13 @@ enum
 
 enum
 {
-	CUT,
-	COPY,
-	PASTE,
-	RENAME,
-	DELETE,
-	NEWFOLDER,
-	ADDTOZIP,
+//	CUT,
+//	COPY,
+//	PASTE,
+//	RENAME,
+//	DELETE,
+//	NEWFOLDER,
+//	ADDTOZIP,
 	CHECK_MD5,
 	PROPERTIES,
 };

@@ -32,11 +32,11 @@
 #include "Controls/Clipboard.h"
 #include "Controls/Taskbar.h"
 #include "DeviceControls/DeviceHandler.hpp"
-#include "FTPOperations/FTPServer.h"
+//#include "FTPOperations/FTPServer.h"
 #include "Memory/mem2.h"
 #include "VideoOperations/video.h"
-#include "SoundOperations/SoundHandler.hpp"
-#include "SoundOperations/MusicPlayer.h"
+//#include "SoundOperations/SoundHandler.hpp"
+//#include "SoundOperations/MusicPlayer.h"
 #include "TextOperations/FontSystem.h"
 #include "FileOperations/fileops.h"
 #include "DiskOperations/di2.h"
@@ -44,6 +44,7 @@
 #include "audio.h"
 #include "input.h"
 #include "sys.h"
+#include <sys/param.h>
 
 extern "C" bool RebootApp()
 {
@@ -80,11 +81,11 @@ extern "C" void ExitApp()
 	Application::Instance()->quit();
 	Clipboard::DestroyInstance();
 	Taskbar::DestroyInstance();
-	MusicPlayer::DestroyInstance();
+	//MusicPlayer::DestroyInstance();
 	ProgressWindow::DestroyInstance();
-	FTPServer::DestroyInstance();
+	//FTPServer::DestroyInstance();
 	Channels::DestroyInstance();
-	SoundHandler::DestroyInstance();
+	//SoundHandler::DestroyInstance();
 	Application::DestroyInstance();
 	Resources::DestroyInstance();
 	DeviceHandler::DestroyInstance();
@@ -164,8 +165,8 @@ extern "C" void Sys_LoadMenu(void)
 
 	if(Settings.OverridePriiloader) {
 		// Priiloader shutup
-		*(u32 *)0x8132fffb = 0x50756e65;
-		DCFlushRange((u32 *)0x8132fffb, 4);
+	//	*(u32 *)0x8132fffb = 0x50756e65;
+	//	DCFlushRange((u32 *)0x8132fffb, 4);
 	}
 
 	/* Return to the Wii system menu */

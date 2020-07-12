@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
 #include "UpdateTask.h"
-#include "ArchiveOperations/ZipFile.h"
+//#include "ArchiveOperations/ZipFile.h"
 #include "Controls/Application.h"
 #include "FileOperations/fileops.h"
 #include "Controls/Application.h"
@@ -29,10 +29,10 @@
 #include "svnrev.h"
 #include "sys.h"
 
-static const char * appUpdateURL = "http://wiixplorer.googlecode.com/svn/trunk/HBC/update.xml";
-static const char * metaUpdateURL = "http://wiixplorer.googlecode.com/svn/trunk/HBC/meta.xml";
-static const char * iconUpdateURL = "http://wiixplorer.googlecode.com/svn/trunk/HBC/icon.png";
-static const char * languageUpdateURL = "http://wiixplorer.googlecode.com/svn/trunk/Languages/";
+///static const char * appUpdateURL = "http://wiixplorer.googlecode.com/svn/trunk/HBC/update.xml";
+//sttic const char * metaUpdateURL = "http://wiixplorer.googlecode.com/svn/trunk/HBC/meta.xml";
+//static const char * iconUpdateURL = "http://wiixplorer.googlecode.com/svn/trunk/HBC/icon.png";
+//static const char * languageUpdateURL = "http://wiixplorer.googlecode.com/svn/trunk/Languages/";
 
 UpdateTask::UpdateTask(bool updateApp, bool updateLang, bool silent)
 	: Task(tr("Checking for updates")), bAutoDelete(false),
@@ -48,7 +48,7 @@ void UpdateTask::Execute(void)
 {
 	TaskBegin(this);
 
-	if(bUpdateApp)
+	if(false)//if(bUpdateApp)
 	{
 		int res = CheckForUpdate();
 		if(!bSilent)
@@ -60,10 +60,10 @@ void UpdateTask::Execute(void)
 		}
 	}
 
-	if(bUpdateLang)
+	if(false)//if(bUpdateLang)
 		UpdateLanguageFiles();
 
-	if(bAutoDelete)
+	if(false)//if(bAutoDelete)
 		Application::Instance()->PushForDelete(this);
 }
 
@@ -72,6 +72,8 @@ void UpdateTask::Execute(void)
  ***************************************************************************/
 int UpdateTask::CheckForUpdate(void)
 {
+	return -1;
+	/*
 	if(!IsNetworkInit())
 		return -1;
 
@@ -152,6 +154,7 @@ int UpdateTask::CheckForUpdate(void)
 	}
 
 	return revnumber;
+	*/
 }
 
 
@@ -160,6 +163,8 @@ int UpdateTask::CheckForUpdate(void)
  ***************************************************************************/
 int UpdateTask::DownloadApp(const char *url)
 {
+	return -1;
+	/*
 	if(!url)
 	{
 		ThrowMsg(tr("Error"), tr("URL is empty."));
@@ -200,6 +205,7 @@ int UpdateTask::DownloadApp(const char *url)
 	}
 
 	return 1;
+	*/
 }
 
 /****************************************************************************
@@ -207,6 +213,8 @@ int UpdateTask::DownloadApp(const char *url)
  ***************************************************************************/
 bool UpdateTask::DownloadMetaXml(void)
 {
+	return false;
+	/*
 	if(!IsNetworkInit())
 		return false;
 
@@ -232,6 +240,7 @@ bool UpdateTask::DownloadMetaXml(void)
 	free(file.data);
 
 	return true;
+	*/
 }
 
 /****************************************************************************
@@ -239,6 +248,8 @@ bool UpdateTask::DownloadMetaXml(void)
  ***************************************************************************/
 bool UpdateTask::DownloadIconPNG(void)
 {
+	return false;
+	/*
 	if(!IsNetworkInit())
 		return false;
 
@@ -264,6 +275,7 @@ bool UpdateTask::DownloadIconPNG(void)
 	free(file.data);
 
 	return true;
+	*/
 }
 
 /****************************************************************************
@@ -271,6 +283,8 @@ bool UpdateTask::DownloadIconPNG(void)
  ***************************************************************************/
 bool UpdateTask::UpdateLanguageFiles(void)
 {
+	return false;
+	/*
 	if(!IsNetworkInit())
 		return false;
 
@@ -346,4 +360,5 @@ bool UpdateTask::UpdateLanguageFiles(void)
 	ProgressWindow::Instance()->SetUnit(NULL);
 
 	return FilesDownloaded;
+	*/
 }

@@ -25,18 +25,18 @@
 #include "DeviceControls/DeviceHandler.hpp"
 #include "DeviceControls/PartitionFormatterGUI.hpp"
 #include "DeviceControls/RemountTask.h"
-#include "FTPOperations/FTPServerMenu.h"
+//#include "FTPOperations/FTPServerMenu.h"
 #include "Launcher/Applications.h"
 #include "Launcher/Channels.h"
 #include "Launcher/OperaBooter.hpp"
 #include "network/networkops.h"
-#include "SoundOperations/SoundHandler.hpp"
-#include "SoundOperations/MusicPlayer.h"
+//#include "SoundOperations/SoundHandler.hpp"
+//#include "SoundOperations/MusicPlayer.h"
 #include "input.h"
 #include "sys.h"
 
 #include "Menus/Explorer.h"
-#include "Menus/Settings/MainSettingsMenu.h"
+//#include "Menus/Settings/MainSettingsMenu.h"
 
 enum
 {
@@ -84,17 +84,17 @@ Taskbar::Taskbar()
 
 	HeadPhonesData = Resources::GetImageData("player_icon.png");
 	HeadPhonesImg = new GuiImage(HeadPhonesData);
-	Musicplayer = new GuiButton(HeadPhonesData->GetWidth(), HeadPhonesData->GetHeight());
-	Musicplayer->SetImage(HeadPhonesImg);
-	Musicplayer->SetAlignment(ALIGN_LEFT | ALIGN_MIDDLE);
-	Musicplayer->SetTrigger(trigA);
-	Musicplayer->SetPosition(458, 0);
-	Musicplayer->SetEffectGrow();
-	Musicplayer->Clicked.connect(this, &Taskbar::OnMusicPlayerClick);
+	//Musicplayer = new GuiButton(HeadPhonesData->GetWidth(), HeadPhonesData->GetHeight());
+	//Musicplayer->SetImage(HeadPhonesImg);
+	//Musicplayer->SetAlignment(ALIGN_LEFT | ALIGN_MIDDLE);
+	//Musicplayer->SetTrigger(trigA);
+	//Musicplayer->SetPosition(458, 0);
+	//Musicplayer->SetEffectGrow();
+	//Musicplayer->Clicked.connect(this, &Taskbar::OnMusicPlayerClick);
 
 	Append(taskbarImg);
-	Append(startBtn);
-	Append(Musicplayer);
+	//Append(startBtn);
+	//Append(Musicplayer);
 	Append(timeTxt);
 
 	SetAlignment(ALIGN_CENTER | ALIGN_BOTTOM);
@@ -183,15 +183,16 @@ void Taskbar::Draw()
 
 void Taskbar::OnStartButtonClick(GuiButton *sender, int pointer, const POINT &p UNUSED)
 {
-	PopUpMenu *StartMenu = new PopUpMenu(screenwidth/2-width/2-2, Settings.ShowFormatter ? 75 : 105);
-	StartMenu->AddItem(tr("Apps"), "apps.png", true);
-	StartMenu->AddItem(tr("Channels"), "channels.png", true);
-	StartMenu->AddItem(tr("URL List"), "opera_icon.png", true);
-	StartMenu->AddItem(tr("BootMii"), "BootMii.png");
+	/*
+	//PopUpMenu *StartMenu = new PopUpMenu(screenwidth/2-width/2-2, Settings.ShowFormatter ? 75 : 105);
+	//StartMenu->AddItem(tr("Apps"), "apps.png", true);
+	//StartMenu->AddItem(tr("Channels"), "channels.png", true);
+	//StartMenu->AddItem(tr("URL List"), "opera_icon.png", true);
+	//StartMenu->AddItem(tr("BootMii"), "BootMii.png");
 	if(Settings.ShowFormatter)
 		StartMenu->AddItem(tr("Formatter"), "usbstorage.png");
 	StartMenu->AddItem(tr("Settings"), "settings.png");
-	StartMenu->AddItem(tr("FTP Server"), "network.png");
+	//StartMenu->AddItem(tr("FTP Server"), "network.png");
 	StartMenu->AddItem(tr("Remount"), "refresh.png");
 	StartMenu->AddItem(tr("Restart"), "system_restart.png");
 	StartMenu->AddItem(tr("Exit"), "system_log_out.png");
@@ -205,10 +206,12 @@ void Taskbar::OnStartButtonClick(GuiButton *sender, int pointer, const POINT &p 
 
 	Application::Instance()->SetUpdateOnly(StartMenu);
 	Application::Instance()->Append(StartMenu);
+	*/
 }
 
 void Taskbar::OnStartmenuItemClick(PopUpMenu *menu, int item)
 {
+	/*
 	if(item >= FORMATTER && !Settings.ShowFormatter)
 		item++;
 
@@ -239,22 +242,22 @@ void Taskbar::OnStartmenuItemClick(PopUpMenu *menu, int item)
 	}
 	else if (item == URLS)
 	{
-		PopUpMenu * LinksMenu = new PopUpMenu(0, 0);
-		OperaBooter *Booter = new OperaBooter(Settings.LinkListPath);
+		//PopUpMenu * LinksMenu = new PopUpMenu(0, 0);
+		//OperaBooter *Booter = new OperaBooter(Settings.LinkListPath);
 
-		LinksMenu->AddItem(tr("Add Link"));
+		//LinksMenu->AddItem(tr("Add Link"));
 
-		for (int i = 0; i < Booter->GetCount(); i++)
-		{
-			const char * name = Booter->GetName(i);
-			if(name)
-				LinksMenu->AddItem(name);
-		}
+		//for (int i = 0; i < Booter->GetCount(); i++)
+		//{
+		//	const char * name = Booter->GetName(i);
+		//	if(name)
+		//		LinksMenu->AddItem(name);
+		//}
 
-		LinksMenu->Finish();
-		LinksMenu->SetUserData(Booter);
-		LinksMenu->ItemClicked.connect(this, &Taskbar::OnUrlsMenuClick);
-		menu->OpenSubMenu(item, LinksMenu);
+		//LinksMenu->Finish();
+		//LinksMenu->SetUserData(Booter);
+		//LinksMenu->ItemClicked.connect(this, &Taskbar::OnUrlsMenuClick);
+		//menu->OpenSubMenu(item, LinksMenu);
 	}
 	else if (item == BOOTMII)
 	{
@@ -283,7 +286,7 @@ void Taskbar::OnStartmenuItemClick(PopUpMenu *menu, int item)
 		menu->Closing.connect(this, &Taskbar::OnMenuClosing);
 		Application::Instance()->Append(menu);
 	}
-	else if (item == FTPSERVER)
+	/*else if (item == FTPSERVER)
 	{
 		//! Close main explorer
 		mainExplorer->hide();
@@ -297,7 +300,7 @@ void Taskbar::OnStartmenuItemClick(PopUpMenu *menu, int item)
 		FTPMenu->Closing.connect(this, &Taskbar::OnMenuClosing);
 
 		Application::Instance()->Append(FTPMenu);
-	}
+	} /
 	else if (item == REMOUNT)
 	{
 		if (WindowPrompt(tr("Do you want to remount all devices?"), 0, tr("Yes"), tr("Cancel")))
@@ -336,10 +339,12 @@ void Taskbar::OnStartmenuItemClick(PopUpMenu *menu, int item)
 		}
 		Application::Instance()->PushForDelete(menu);
 	}
+	*/
 }
 
 void Taskbar::OnAppsMenuClick(PopUpMenu *menu, int item)
 {
+	/*
 	PopUpMenu *parent = (PopUpMenu *) menu->GetParent();
 	Applications *Apps = (Applications *) menu->GetUserData();
 	Application::Instance()->Remove(menu);
@@ -358,10 +363,12 @@ void Taskbar::OnAppsMenuClick(PopUpMenu *menu, int item)
 
 	delete Apps;
 	Application::Instance()->PushForDelete(menu);
+	*/
 }
 
 void Taskbar::OnChannelsMenuClick(PopUpMenu *menu, int item)
 {
+	/*
 	PopUpMenu *parent = (PopUpMenu *) menu->GetParent();
 	Application::Instance()->Remove(menu);
 
@@ -378,10 +385,12 @@ void Taskbar::OnChannelsMenuClick(PopUpMenu *menu, int item)
 	}
 
 	Application::Instance()->PushForDelete(menu);
+	*/
 }
 
 void Taskbar::OnUrlsMenuClick(PopUpMenu *menu, int item)
 {
+	/*
 	PopUpMenu *parent = (PopUpMenu *) menu->GetParent();
 	OperaBooter *Booter = (OperaBooter *) menu->GetUserData();
 	Application::Instance()->Remove(menu);
@@ -412,11 +421,12 @@ void Taskbar::OnUrlsMenuClick(PopUpMenu *menu, int item)
 	delete Booter;
 
 	Application::Instance()->PushForDelete(menu);
+	*/
 }
 
 void Taskbar::OnMusicPlayerClick(GuiButton *sender UNUSED, int pointer UNUSED, const POINT &p3 UNUSED)
 {
-	MusicPlayer::Instance()->Show();
+	//MusicPlayer::Instance()->Show();
 }
 
 void Taskbar::OnMenuClosing(GuiFrame *menu UNUSED)

@@ -31,7 +31,7 @@
 #include <zlib.h>
 #include <fcntl.h>
 #include <ogc/machine/processor.h>
-#include "ArchiveOperations/Archive.h"
+//#include "ArchiveOperations/Archive.h"
 #include "Prompts/PromptWindows.h"
 #include "Prompts/ProgressWindow.h"
 
@@ -100,7 +100,6 @@ bool NetReceiver::CheckIncomming()
 
 	//Open socket
 	socket = net_socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
-
 	if (socket == INVALID_SOCKET)
 	{
 		return false;
@@ -284,15 +283,15 @@ const u8 * NetReceiver::UncompressData()
 
 		FreeData();
 
-		ArchiveHandle * Zip = new ArchiveHandle(tempfilepath);
-		if(!Zip->ExtractAll(temppath))
-		{
-			delete Zip;
-			RemoveDirectory(temppath);
-			return NULL;
-		}
+		//ArchiveHandle * Zip = new ArchiveHandle(tempfilepath);
+		//if(!Zip->ExtractAll(temppath))
+		//{
+		//	delete Zip;
+		//	RemoveDirectory(temppath);
+		//	return NULL;
+		//}
 
-		delete Zip;
+		//delete Zip;
 
 		DirList Dir(temppath, ".dol,.elf");
 		if(Dir.GetFilecount() <= 0)

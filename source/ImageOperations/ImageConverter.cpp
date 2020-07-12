@@ -87,7 +87,7 @@ bool ImageConverter::LoadImage(const u8 * img, int imgSize)
 	}
 	else if ((img[0] == 0x49 && img[1] == 0x49) || (img[0] == 0x4D && img[1] == 0x4D))
 	{
-		gdImage = gdImageCreateFromTiffPtr(imgSize, (u8*) img);
+		gdImage = NULL;//gdImageCreateFromTiffPtr(imgSize, (u8*) img);
 		InputType = IMAGE_TIFF;
 	}
 	else if (img[0] == 'B' && img[1] == 'M')

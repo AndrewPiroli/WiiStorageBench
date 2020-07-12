@@ -26,7 +26,7 @@
 #ifndef PDFVIEWER_HPP_
 #define PDFVIEWER_HPP_
 
-#include <mupdf/pdftool.h>
+//#include <mupdf/pdftool.h>
 #include "ImageOperations/ImageViewer.h"
 
 class PDFViewer : public ImageViewer
@@ -52,8 +52,10 @@ class PDFViewer : public ImageViewer
 		bool LoadImageList(const char * filepath UNUSED) { return true; };
 
 		u8 * OutputImage;
-		fz_glyphcache *drawcache;
-		pdf_page *drawpage;
+		void *drawcache;
+		//fz_glyphcache *drawcache;
+		void *drawpage;
+		//pdf_page *drawpage;
 		float drawzoom;
 		int LoopMode;
 		int currentPage;

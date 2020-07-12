@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
 #include "Explorer.h"
-#include "ArchiveOperations/ArchiveBrowser.h"
+//#include "ArchiveOperations/ArchiveBrowser.h"
 #include "FileOperations/ListFileBrowser.hpp"
 #include "FileOperations/IconFileBrowser.hpp"
 #include "FileOperations/fileops.h"
@@ -327,14 +327,14 @@ void Explorer::OnBrowserChanges(int index UNUSED)
 			if(fileBrowser == curBrowser)
 				Settings.LastUsedPath.assign(curBrowser->GetCurrentPath());
 		}
-		else if(result == CLOSE_ARCHIVE && fileBrowser != curBrowser)
+		/*else if(result == CLOSE_ARCHIVE && fileBrowser != curBrowser)
 		{
 			delete curBrowser;
 			curBrowser = fileBrowser;
 			guiBrowser->SetBrowser(curBrowser);
 			guiBrowser->Refresh();
 			AdressText->SetTextf("%s", curBrowser->GetCurrentPath());
-		}
+		}*/
 		else
 		{
 			ShowError(tr("Can't browse that path."));
@@ -350,16 +350,16 @@ void Explorer::OnBrowserChanges(int index UNUSED)
 
 		SetState(STATE_DEFAULT);
 
-		if(result == ARCHIVE)
-		{
-			if(fileBrowser != curBrowser)
-				delete curBrowser;
+		//if(result == ARCHIVE)
+		//{
+		//	if(fileBrowser != curBrowser)
+		//		delete curBrowser;
 
-			curBrowser = new ArchiveBrowser(curBrowser->GetCurrentSelectedFilepath());
-			guiBrowser->SetBrowser(curBrowser);
-			AdressText->SetText(curBrowser->GetCurrentPath());
-		}
-		else if(result == REFRESH_BROWSER || result == RELOAD_BROWSER)
+		//	curBrowser = new ArchiveBrowser(curBrowser->GetCurrentSelectedFilepath());
+		//	guiBrowser->SetBrowser(curBrowser);
+		//	AdressText->SetText(curBrowser->GetCurrentPath());
+		//}
+		/*else */if(result == REFRESH_BROWSER || result == RELOAD_BROWSER)
 		{
 			guiBrowser->Refresh();
 		}
@@ -373,15 +373,15 @@ void Explorer::OnRightClick(PopUpMenu *menu, int item)
 
 	guiBrowser->SetState(STATE_DISABLED);
 
-	if(item >= 0 && curBrowser != fileBrowser) //! Archive
-	{
-		ProcessArcChoice(item, fileBrowser->GetCurrentPath());
-		guiBrowser->Refresh();
-	}
-	else if(item >= 0)  //! Real file browser
-	{
+	//if(item >= 0 && curBrowser != fileBrowser) //! Archive
+	//{
+	//	ProcessArcChoice(item, fileBrowser->GetCurrentPath());
+	//	guiBrowser->Refresh();
+	//}
+	//else if(item >= 0)  //! Real file browser
+	//{
 		ProcessChoice(item);
-	}
+	//}
 
 	guiBrowser->SetState(STATE_DEFAULT);
 
@@ -443,29 +443,29 @@ void Explorer::OnDeviceButtonClick(GuiButton *sender UNUSED, int pointer UNUSED,
 void Explorer::OnContextButtonClick(GuiButton *sender UNUSED, int pointer UNUSED, const POINT &p)
 {
 	PopUpMenu *RightClick = NULL;
-	if(curBrowser != fileBrowser) //! Archive
-	{
+	//if(curBrowser != fileBrowser) //! Archive
+	//{
+	//	RightClick = new PopUpMenu(p.x, p.y);
+	//	RightClick->AddItem(tr("Paste"));
+	//	RightClick->AddItem(tr("Extract"));
+	//	RightClick->AddItem(tr("Extract All"));
+	//	RightClick->AddItem(tr("Properties"));
+	//	RightClick->Finish();
+	//}
+	//else //! Real file browser
+	//{
 		RightClick = new PopUpMenu(p.x, p.y);
-		RightClick->AddItem(tr("Paste"));
-		RightClick->AddItem(tr("Extract"));
-		RightClick->AddItem(tr("Extract All"));
-		RightClick->AddItem(tr("Properties"));
-		RightClick->Finish();
-	}
-	else //! Real file browser
-	{
-		RightClick = new PopUpMenu(p.x, p.y);
-		RightClick->AddItem(tr("Cut"));
-		RightClick->AddItem(tr("Copy"));
-		RightClick->AddItem(tr("Paste"));
-		RightClick->AddItem(tr("Rename"));
-		RightClick->AddItem(tr("Delete"));
-		RightClick->AddItem(tr("New Folder"));
-		RightClick->AddItem(tr("Add to zip"));
+	//	RightClick->AddItem(tr("Cut"));
+	//	RightClick->AddItem(tr("Copy"));
+	//	RightClick->AddItem(tr("Paste"));
+	//	RightClick->AddItem(tr("Rename"));
+	//	RightClick->AddItem(tr("Delete"));
+	//	RightClick->AddItem(tr("New Folder"));
+	//	RightClick->AddItem(tr("Add to zip"));
 		RightClick->AddItem(tr("MD5 Check"));
 		RightClick->AddItem(tr("Properties"));
 		RightClick->Finish();
-	}
+	//}
 	RightClick->ItemClicked.connect(this, &Explorer::OnRightClick);
 	Application::Instance()->SetUpdateOnly(RightClick);
 	Application::Instance()->Append(RightClick);

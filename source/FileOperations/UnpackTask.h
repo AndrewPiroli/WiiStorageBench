@@ -18,11 +18,11 @@
 #define UNPACKTASK_H_
 
 #include "FileOperations/ProcessTask.h"
-#include "ArchiveOperations/Archive.h"
-#include "ArchiveOperations/ArchiveBrowser.h"
+//#include "ArchiveOperations/Archive.h"
+//#include "ArchiveOperations/ArchiveBrowser.h"
 
 class UnpackTask : public ProcessTask
-{
+{/*
 public:
 	UnpackTask(const ItemMarker *process, const std::string &dest, ArchiveHandle *archive, bool fullUnpack);
 	virtual ~UnpackTask();
@@ -33,6 +33,7 @@ private:
 	ArchiveHandle *archive;
 	ArchiveBrowser *browser;
 	bool fullUnpack;
+	*/
 };
 
 #endif /* UNPACKTASK_H_ */

@@ -16,7 +16,7 @@
  ****************************************************************************/
 #ifndef PACKTASK_H_
 #define PACKTASK_H_
-
+/*
 #include "FileOperations/ProcessTask.h"
 #include "ArchiveOperations/Archive.h"
 
@@ -30,5 +30,5 @@ private:
 	ArchiveHandle *archive;
 	int compression;
 };
-
+*/
 #endif /* PACKTASK_H_ */
