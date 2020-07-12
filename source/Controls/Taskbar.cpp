@@ -27,8 +27,6 @@
 #include "DeviceControls/RemountTask.h"
 //#include "FTPOperations/FTPServerMenu.h"
 #include "Launcher/Applications.h"
-#include "Launcher/Channels.h"
-#include "Launcher/OperaBooter.hpp"
 #include "network/networkops.h"
 //#include "SoundOperations/SoundHandler.hpp"
 //#include "SoundOperations/MusicPlayer.h"

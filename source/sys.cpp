@@ -26,7 +26,6 @@
 #include "network/networkops.h"
 #include "Prompts/PromptWindows.h"
 #include "Prompts/ProgressWindow.h"
-#include "Launcher/Channels.h"
 #include "Controls/Application.h"
 #include "Controls/Clipboard.h"
 #include "Controls/Taskbar.h"
@@ -65,7 +64,6 @@ extern "C" void ExitApp()
 	Clipboard::DestroyInstance();
 	Taskbar::DestroyInstance();
 	ProgressWindow::DestroyInstance();
-	Channels::DestroyInstance();
 	Application::DestroyInstance();
 	Resources::DestroyInstance();
 	DeviceHandler::DestroyInstance();
