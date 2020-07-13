@@ -218,11 +218,6 @@ bool CSettings::LoadLanguage(const char *path, int language)
 
 bool CSettings::Reset()
 {
-	//this->SetDefault();
-
-	//if(this->Save())
-	//	return true;
-
 	return false;
 }
 
