@@ -58,6 +58,10 @@ void MD5Task::CloseLog()
 void MD5Task::Execute(void)
 {
 	TaskBegin(this);
+	if(Process.IsItemDir(0)){
+		TaskEnd(this);
+		return;
+	}
 
 	if(Process.GetItemcount() == 0 || !OpenLog(destPath.c_str()))
 	{
@@ -93,13 +97,7 @@ void MD5Task::Execute(void)
 
 		fprintf(LogFile, "\n");
 
-		if(Process.IsItemDir(i))
-		{
-			snprintf(currentpath, sizeof(currentpath), "%s/", Process.GetItemPath(i));
-			fprintf(LogFile, "%s %s\n\n", tr("Checking directory:"), currentpath);
-			CalculateDirectory(currentpath);
-		}
-		else
+		if(!Process.IsItemDir(i))
 		{
 			snprintf(currentpath, sizeof(currentpath), "%s", Process.GetItemPath(i));
 			fprintf(LogFile, "%s %s\n\n", tr("Checking file:"), currentpath);
@@ -209,42 +207,5 @@ bool MD5Task::CalculateFile(const char * filepath)
 
 bool MD5Task::CalculateDirectory(const char * path)
 {
-	if(!LogFile || !path)
-	{
-		++ErrorCounter;
-		return false;
-	}
-
-	if(ProgressWindow::Instance()->IsRunning())
-		ProgressWindow::Instance()->SetTitle(tr("Getting file list..."));
-	else
-		StartProgress(tr("Getting file list..."));
-
-	DirList dir;
-	dir.LoadPath(path, 0, DirList::Files | DirList::Dirs | DirList::CheckSubfolders);
-	dir.SortList();
-
-	if(dir.GetFilecount() <= 0)
-	{
-		fprintf(LogFile, tr("Error - Could not parse directory: %s\n"), path);
-		++ErrorCounter;
-		return false;
-	}
-
-	for(int i = 0; i < dir.GetFilecount(); i++)
-	{
-		if(ProgressWindow::Instance()->IsCanceled())
-			break;
-
-		if(!dir.IsDir(i))
-		{
-			CalculateFile(dir.GetFilepath(i));
-		}
-		else
-		{
-			++FolderCounter;
-		}
-	}
-
-	return true;
+	return false;
 }
