@@ -85,8 +85,8 @@ void MD5Task::Execute(void)
 	FileCounter = 0;
 	ErrorCounter = 0;
 
-	fprintf(LogFile, tr("--------------------------------------------------\n"));
-	fprintf(LogFile, tr("WiiXplorer MD5 Calculator\n"));
+	//fprintf(LogFile, tr("--------------------------------------------------\n"));
+	//fprintf(LogFile, tr("WiiXplorer MD5 Calculator\n"));
 
 	char currentpath[1024];
 
@@ -95,27 +95,27 @@ void MD5Task::Execute(void)
 		if(ProgressWindow::Instance()->IsCanceled())
 			break;
 
-		fprintf(LogFile, "\n");
+		//fprintf(LogFile, "\n");
 
 		if(!Process.IsItemDir(i))
 		{
 			snprintf(currentpath, sizeof(currentpath), "%s", Process.GetItemPath(i));
-			fprintf(LogFile, "%s %s\n\n", tr("Checking file:"), currentpath);
+			//fprintf(LogFile, "%s %s\n\n", tr("Checking file:"), currentpath);
 			CalculateFile(currentpath);
 		}
 	}
 
-	fprintf(LogFile, tr("--------------------------------------------------\n"));
-	fprintf(LogFile, tr("Checked %i file(s) in %i folder(s).\n"), FileCounter, FolderCounter);
-	fprintf(LogFile, tr("Encountered %i error(s).\n"), ErrorCounter);
-	fprintf(LogFile, tr("--------------------------------------------------\n\n"));
+	//fprintf(LogFile, tr("--------------------------------------------------\n"));
+	//fprintf(LogFile, tr("Checked %i file(s) in %i folder(s).\n"), FileCounter, FolderCounter);
+	//fprintf(LogFile, tr("Encountered %i error(s).\n"), ErrorCounter);
+	//fprintf(LogFile, tr("--------------------------------------------------\n\n"));
 
 	CloseLog();
 
-	if(ErrorCounter > 0)
-		ThrowMsg(tr("Hashing complete."), fmt(tr("%i error(s) encountered. Check MD5.log for more details."), ErrorCounter));
-	else
-		ThrowMsg(tr("Hashing successfully finished."), tr("Log was saved in MD5.log"));
+	//if(ErrorCounter > 0)
+	//	ThrowMsg(tr("Hashing complete."), fmt(tr("%i error(s) encountered. Check MD5.log for more details."), ErrorCounter));
+	//else
+	//	ThrowMsg(tr("Hashing successfully finished."), tr("Log was saved in MD5.log"));
 
 	TaskEnd(this);
 }
@@ -131,7 +131,7 @@ bool MD5Task::CalculateFile(const char * filepath)
 	char * filename = strrchr(filepath, '/');
 	if(!filename)
 	{
-		fprintf(LogFile, tr("Error - %s is not a file\n"), filepath);
+		//fprintf(LogFile, tr("Error - %s is not a file\n"), filepath);
 		++ErrorCounter;
 		return false;
 	}
@@ -148,7 +148,7 @@ bool MD5Task::CalculateFile(const char * filepath)
 
 	if (file == NULL || filesize == 0)
 	{
-		fprintf(LogFile, tr("Error - Could not open file: %s\n"), filepath);
+		//fprintf(LogFile, tr("Error - Could not open file: %s\n"), filepath);
 		++ErrorCounter;
 		return false;
 	}
@@ -160,7 +160,7 @@ bool MD5Task::CalculateFile(const char * filepath)
 	if(!buffer)
 	{
 		fclose(file);
-		fprintf(LogFile, tr("Error - Not enough memory on: %s\n"), filepath);
+		//fprintf(LogFile, tr("Error - Not enough memory on: %s\n"), filepath);
 		++ErrorCounter;
 		return false;
 	}
@@ -200,7 +200,7 @@ bool MD5Task::CalculateFile(const char * filepath)
 
 	++FileCounter;
 
-	fprintf(LogFile, "%s - %i. %s\n", HashString, FileCounter, filepath);
+	//fprintf(LogFile, "%s - %i. %s\n", HashString, FileCounter, filepath);
 
 	return true;
 }
