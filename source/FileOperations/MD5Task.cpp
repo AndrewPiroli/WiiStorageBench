@@ -178,8 +178,10 @@ bool MD5Task::CalculateFile(const char * filepath)
 
 		read = fread(buffer, 1, BLOCKSIZE, file);
 
-		if(read > 0)
-			auth_md5SumCtx(ctx, buffer, read);
+		if(read > 0){
+			asm volatile ("ori 0,0,0"); //Paranoid about compiler/linker optimizing things away, this is a NOP instruction but marked as volatile, so it should force this code to exist.
+			//auth_md5SumCtx(ctx, buffer, read);
+		}
 
 		done += read;
 	}
