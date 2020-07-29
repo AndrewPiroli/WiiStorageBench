@@ -21,7 +21,6 @@
 #include "MD5Task.h"
 #include "Language/gettext.h"
 #include "FileOperations/fileops.h"
-#include "FileOperations/MD5.h"
 #include "Prompts/ProgressWindow.h"
 #include "DirList.h"
 
@@ -138,8 +137,8 @@ bool MD5Task::CalculateFile(const char * filepath)
 
 	filename++;
 
-	u8 Hash[32];
-	auth_md5Ctx ctx[1];
+	//u8 Hash[32];
+	//auth_md5Ctx ctx[1];
 	int read = 0;
 	u64 done = 0;
 	u64 filesize = FileSize(filepath);
@@ -153,7 +152,7 @@ bool MD5Task::CalculateFile(const char * filepath)
 		return false;
 	}
 
-	auth_md5InitCtx(ctx);
+	//auth_md5InitCtx(ctx);
 
 	u8 * buffer = (u8 *) malloc(BLOCKSIZE);
 
@@ -193,12 +192,12 @@ bool MD5Task::CalculateFile(const char * filepath)
 	// finish up the progress for this file
 	FinishProgress(filesize);
 
-	auth_md5CloseCtx(ctx, Hash);
+	//auth_md5CloseCtx(ctx, Hash);
 
-	char HashString[100];
-	memset(HashString, 0, sizeof(HashString));
+	//char HashString[100];
+	//memset(HashString, 0, sizeof(HashString));
 
-	MD5ToString(Hash, HashString);
+	//MD5ToString(Hash, HashString);
 
 	++FileCounter;
 
