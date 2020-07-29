@@ -30,7 +30,7 @@
 #include "VideoOperations/video.h"
 #include "sys.h"
 
-int main(int argc UNUSED, char *argv[] UNUSED)
+int main()
 {
 	__exception_setreload(1);
 	// Initialize video before anything else as otherwise green stripes are produced, need to figure out why...
@@ -39,10 +39,6 @@ int main(int argc UNUSED, char *argv[] UNUSED)
 	Application::Instance()->init();
 	Application::Instance()->show();
 	Application::Instance()->exec();
-
-	/* Return to the Wii system menu  if not from HBC*/
-	if(!IsFromHBC())
-		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 
 	return 0;
 }
