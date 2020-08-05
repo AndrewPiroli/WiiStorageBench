@@ -48,9 +48,9 @@ void MD5Task::Execute(void)
 	}
 
 	if(ProgressWindow::Instance()->IsRunning())
-		ProgressWindow::Instance()->SetTitle(tr("Calculating total size..."));
+		ProgressWindow::Instance()->SetTitle(tr("Benchmarking"));
 	else
-		StartProgress(tr("Calculating total size..."));
+		StartProgress(tr("Benchmarking"));
 
 	list<ItemList> itemList;
 	GetItemList(itemList, false);
@@ -138,6 +138,12 @@ bool MD5Task::CalculateFile(const char * filepath)
 	free(buffer);
 
 	// finish up the progress for this file
+	char * tmp = strdup(ProgressWindow::Instance()->GetSpeedTxt()->toUTF8().c_str());
+	if(tmp){
+		ThrowMsg(tr("Final result:"),tr(tmp));
+		free(tmp);
+		tmp = NULL;
+	}
 	FinishProgress(filesize);
 
 	++FileCounter;

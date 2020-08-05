@@ -48,6 +48,7 @@ public:
 	void Draw();
 	void SetCompleteValues(const s64 &done, const s64 &total) { completeDone = done; completeTotal = total; }
 	void SetUnit(const char *u) { ProgressUnit = u; }
+	GuiText* GetSpeedTxt() {return speedTxt;}
 private:
 	ProgressWindow();
 	virtual ~ProgressWindow();
