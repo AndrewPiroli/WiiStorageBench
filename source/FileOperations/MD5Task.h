@@ -28,10 +28,7 @@ public:
 	virtual ~MD5Task();
 	void Execute(void);
 private:
-	bool OpenLog(const char * path);
-	void CloseLog();
 	bool CalculateFile(const char * filepath);
-	bool CalculateDirectory(const char * path);
 
 	FILE * LogFile;
 	int FolderCounter;

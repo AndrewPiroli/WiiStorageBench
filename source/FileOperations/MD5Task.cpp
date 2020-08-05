@@ -32,20 +32,7 @@ MD5Task::MD5Task(const ItemMarker *p, const std::string &dest)
 {
 }
 
-MD5Task::~MD5Task()
-{
-	CloseLog();
-}
-
-bool MD5Task::OpenLog(const char * path)
-{
-	LogFile = NULL;
-	return false;
-}
-
-void MD5Task::CloseLog()
-{
-}
+MD5Task::~MD5Task(){}
 
 void MD5Task::Execute(void)
 {
@@ -55,9 +42,8 @@ void MD5Task::Execute(void)
 		return;
 	}
 
-	if(Process.GetItemcount() == 0 || !OpenLog(destPath.c_str()))
+	if(Process.GetItemcount() == 0)
 	{
-		ThrowMsg(tr("Error:"), tr("MD5 log file can't be created."));
 		TaskEnd(this);
 	}
 
@@ -70,7 +56,6 @@ void MD5Task::Execute(void)
 	GetItemList(itemList, false);
 	list<ItemList>().swap(itemList);
 
-	ProgressWindow::Instance()->SetTitle(this->getTitle().c_str());
 	ProgressWindow::Instance()->SetCompleteValues(0, CopySize);
 
 	FolderCounter = 0;
@@ -160,7 +145,3 @@ bool MD5Task::CalculateFile(const char * filepath)
 	return true;
 }
 
-bool MD5Task::CalculateDirectory(const char * path)
-{
-	return false;
-}
