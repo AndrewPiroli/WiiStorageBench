@@ -118,9 +118,6 @@ void ProgressWindow::TryOpenWindow()
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WiiControls.ClickButton | ClassicControls.ClickButton << 16, GCControls.ClickButton);
 
-	soundClick = Resources::GetSound("button_click.wav");
-	soundOver = Resources::GetSound("button_over.wav");
-
 	titleTxt = new GuiText(ProgressTitle, 22, (GXColor){0, 0, 0, 255});
 	titleTxt->SetAlignment(ALIGN_CENTER | ALIGN_TOP);
 	titleTxt->SetPosition(0,50);
@@ -147,26 +144,6 @@ void ProgressWindow::TryOpenWindow()
 	AbortBtn->SetEffectGrow();
 	AbortBtn->Clicked.connect(this, &ProgressWindow::OnCancelClick);
 	Append(AbortBtn);
-//
-//	if(Minimizable)
-//	{
-//		MinimizeImg = new GuiImage(btnOutline);
-//		MinimizeTxt = new GuiText(tr("Minimize"), 22, (GXColor){0, 0, 0, 255});
-//		MinimizeBtn = new GuiButton(MinimizeImg->GetWidth(), MinimizeImg->GetHeight());
-//		MinimizeBtn->SetLabel(MinimizeTxt);
-//		MinimizeBtn->SetImage(MinimizeImg);
-//		MinimizeBtn->SetTrigger(trigA);
-//		MinimizeBtn->SetSoundClick(soundClick);
-//		MinimizeBtn->SetSoundOver(soundOver);
-//		MinimizeBtn->SetEffectGrow();
-//		Append(MinimizeBtn);
-//
-//		AbortBtn->SetAlignment(ALIGN_RIGHT | ALIGN_BOTTOM);
-//		AbortBtn->SetPosition(-60, -48);
-//		MinimizeBtn->SetAlignment(ALIGN_LEFT | ALIGN_BOTTOM);
-//		MinimizeBtn->SetPosition(60, -48);
-//	}
-
 	SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 	SetAlignment(ALIGN_CENTER | ALIGN_MIDDLE);
 	DimBackground(true);
