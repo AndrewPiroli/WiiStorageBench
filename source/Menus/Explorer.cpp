@@ -443,26 +443,8 @@ void Explorer::OnDeviceButtonClick(GuiButton *sender UNUSED, int pointer UNUSED,
 void Explorer::OnContextButtonClick(GuiButton *sender UNUSED, int pointer UNUSED, const POINT &p)
 {
 	PopUpMenu *RightClick = NULL;
-	//if(curBrowser != fileBrowser) //! Archive
-	//{
-	//	RightClick = new PopUpMenu(p.x, p.y);
-	//	RightClick->AddItem(tr("Paste"));
-	//	RightClick->AddItem(tr("Extract"));
-	//	RightClick->AddItem(tr("Extract All"));
-	//	RightClick->AddItem(tr("Properties"));
-	//	RightClick->Finish();
-	//}
-	//else //! Real file browser
-	//{
 		RightClick = new PopUpMenu(p.x, p.y);
-	//	RightClick->AddItem(tr("Cut"));
-	//	RightClick->AddItem(tr("Copy"));
-	//	RightClick->AddItem(tr("Paste"));
-	//	RightClick->AddItem(tr("Rename"));
-	//	RightClick->AddItem(tr("Delete"));
-	//	RightClick->AddItem(tr("New Folder"));
-	//	RightClick->AddItem(tr("Add to zip"));
-		RightClick->AddItem(tr("MD5 Check"));
+		RightClick->AddItem(tr("Benchmark Speed"));
 		RightClick->AddItem(tr("Properties"));
 		RightClick->Finish();
 	//}
