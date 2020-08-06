@@ -99,7 +99,11 @@ bool MD5Task::CalculateFile(const char * filepath)
 	int read = 0;
 	u64 done = 0;
 	u64 filesize = FileSize(filepath);
-
+	if (filesize < 1000000){//less than 1MB
+		ThrowMsg(tr("Error"), tr("File too small"));
+		return false;
+	}
+	//ThrowMsg(tr("FileSize(filepath)"), tr(fmt("%u", filesize)));
 	FILE * file = fopen(filepath, "rb");
 
 	if (file == NULL || filesize == 0)
@@ -138,11 +142,19 @@ bool MD5Task::CalculateFile(const char * filepath)
 	free(buffer);
 
 	// finish up the progress for this file
-	char * tmp = strdup(ProgressWindow::Instance()->GetSpeedTxt()->toUTF8().c_str());
-	if(tmp){
-		ThrowMsg(tr("Final result:"),tr(tmp));
-		free(tmp);
-		tmp = NULL;
+	if(ProgressWindow::Instance()->GetWindowOpenStatus()){
+		char * tmp = strdup(ProgressWindow::Instance()->GetSpeedTxt()->toUTF8().c_str());
+		if(tmp){
+			ThrowMsg(tr("Final result:"),tr(tmp));
+			free(tmp);
+			tmp = NULL;
+		}
+		else{
+			ThrowMsg(tr("Error"), tr("Could not get memory to store result"));
+		}
+	}
+	else{
+		ThrowMsg(tr("Error"), tr("File too small"));
 	}
 	FinishProgress(filesize);
 
