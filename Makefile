@@ -51,7 +51,7 @@ DATA		:=	data/binary \
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS		=	-fpermissive -g -O3 -w $(MACHDEP) $(INCLUDE) \
+CFLAGS		=	-fpermissive -O3 -w $(MACHDEP) $(INCLUDE) \
 				-DHAVE_LIBZ -DHAVE_LIBPNG -DHAVE_LIBJPEG -DHAVE_LIBTIFF
 CXXFLAGS	=	$(CFLAGS)
 LDFLAGS		=	$(MACHDEP) -Wl,-Map,$(notdir $@).map,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size
