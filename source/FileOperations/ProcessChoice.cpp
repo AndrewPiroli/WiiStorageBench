@@ -25,7 +25,6 @@
 #include "Prompts/ProgressWindow.h"
 #include "Prompts/PromptWindows.h"
 #include "Prompts/PopUpMenu.h"
-#include "FileStartUp/FileStartUp.h"
 #include "FileOperations/fileops.h"
 #include "FileOperations/MD5Task.h"
 

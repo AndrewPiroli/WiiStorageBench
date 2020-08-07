@@ -15,11 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
 #include "Explorer.h"
-//#include "ArchiveOperations/ArchiveBrowser.h"
 #include "FileOperations/ListFileBrowser.hpp"
 #include "FileOperations/IconFileBrowser.hpp"
 #include "FileOperations/fileops.h"
-#include "FileStartUp/FileStartUp.h"
 #include "DeviceControls/RemountTask.h"
 #include "Controls/Application.h"
 #include "Controls/Clipboard.h"
@@ -350,19 +348,7 @@ void Explorer::OnBrowserChanges(int index UNUSED)
 
 		SetState(STATE_DEFAULT);
 
-		//if(result == ARCHIVE)
-		//{
-		//	if(fileBrowser != curBrowser)
-		//		delete curBrowser;
 
-		//	curBrowser = new ArchiveBrowser(curBrowser->GetCurrentSelectedFilepath());
-		//	guiBrowser->SetBrowser(curBrowser);
-		//	AdressText->SetText(curBrowser->GetCurrentPath());
-		//}
-		/*else */if(result == REFRESH_BROWSER || result == RELOAD_BROWSER)
-		{
-			guiBrowser->Refresh();
-		}
 	}
 }
 

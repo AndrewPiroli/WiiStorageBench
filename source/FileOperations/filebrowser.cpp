@@ -31,7 +31,6 @@
 #include <malloc.h>
 
 #include "filebrowser.h"
-#include "FileStartUp/FileStartUp.h"
 #include "Prompts/PromptWindows.h"
 
 #define MAX_PARSE_ITEMS	(20)
@@ -473,7 +472,7 @@ int FileBrowser::ExecuteFile(const char *filepath)
 	if(!filepath)
 		return -1;
 
-	return FileStartUp(filepath);
+	return 0;
 }
 
 /****************************************************************************
