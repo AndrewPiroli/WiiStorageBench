@@ -7,7 +7,6 @@
  ***************************************************************************/
 #include "stdafx.h"
 #include "Controls/Application.h"
-#include "ImageOperations/Screenshot.h"
 #include "GUI/gui_trigger.h"
 #include "Settings.h"
 #include "input.h"
@@ -82,7 +81,7 @@ void ShutdownPads()
 /****************************************************************************
  * Request for Rumble
  ***************************************************************************/
-void RequestRumble(int chan){})
+void RequestRumble(int chan){}
 
 
 /****************************************************************************
