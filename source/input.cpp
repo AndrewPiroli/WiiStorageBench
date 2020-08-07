@@ -38,15 +38,6 @@ void UpdatePads()
 		userInput[i].pad.substickX = PAD_SubStickX(i);
 		userInput[i].pad.substickY = PAD_SubStickY(i);
 		userInput[i].pad.triggerL = PAD_TriggerL(i);
-		userInput[i].pad.triggerR = PAD_TriggerR(i);
-
-		if(Settings.Rumble)
-			DoRumble(i);
-
-		if((userInput[i].wpad.btns_h & Settings.Controls.ScreenshotHoldButton) && (userInput[i].wpad.btns_d & Settings.Controls.ScreenshotClickButton))
-		{
-			Screenshot();
-		}
 	}
 }
 
@@ -74,8 +65,9 @@ void SetupPads()
 	WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
 	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-	for(int i=0; i < 4; i++)
+	for(int i=0; i < 4; i++){
 		userInput[i].chan = i;
+	}
 }
 
 /****************************************************************************
@@ -90,42 +82,14 @@ void ShutdownPads()
 /****************************************************************************
  * Request for Rumble
  ***************************************************************************/
-void RequestRumble(int chan)
-{
-	rumbleRequest[chan] = 1;
-}
+void RequestRumble(int chan){})
+
 
 /****************************************************************************
  * DoRumble
  ***************************************************************************/
-void DoRumble(int i)
-{
-	if(rumbleRequest[i] && rumbleCount[i] == 0)
-	{
-		WPAD_Rumble(i, 1); // rumble on
-		rumbleRequest[i] = 0;
-		rumbleCount[i] = 8;
-	}
-	else
-	{
-		if(rumbleCount[i] > 0)
-			--rumbleCount[i];
-
-		if(rumbleCount[i] < 4)
-			WPAD_Rumble(i, 0); // rumble off
-
-		rumbleRequest[i] = 0;
-	}
-}
-
+void DoRumble(int i){}
 /****************************************************************************
  * ShutoffRumble
  ***************************************************************************/
-void ShutoffRumble()
-{
-	for(int i=0;i<4;i++)
-	{
-		WPAD_Rumble(i, 0);
-		rumbleCount[i] = 0;
-	}
-}
+void ShutoffRumble(){}
