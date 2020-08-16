@@ -18,26 +18,19 @@ include $(DEVKITPPC)/wii_rules
 TARGET		:=	boot
 BUILD		:=	build
 SOURCES		:=	source \
-				source/ArchiveOperations \
-				source/BootHomebrew \
 				source/Controls \
 				source/DeviceControls \
 				source/DiskOperations \
 				source/FileStartUp \
 				source/FileOperations \
-				source/FTPOperations \
-				source/FTPOperations/ftpii \
 				source/GUI \
 				source/ImageOperations \
 				source/Language \
 				source/Launcher \
 				source/Memory \
 				source/Menus \
-				source/Menus/Settings \
 				source/mload \
-				source/network \
 				source/Prompts \
-				source/SoundOperations \
 				source/System \
 				source/TextOperations \
 				source/Tools \
