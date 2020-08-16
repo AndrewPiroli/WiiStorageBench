@@ -107,17 +107,7 @@ static void _Sys_Shutdown(int SHUTDOWN_MODE)
 {
 	ExitApp();
 
-	if((CONF_GetShutdownMode() == CONF_SHUTDOWN_IDLE &&  SHUTDOWN_MODE != ShutdownToStandby) || SHUTDOWN_MODE == ShutdownToIdle) {
-		s32 ret;
-
-		ret = CONF_GetIdleLedMode();
-		if(ret >= 0 && ret <= 2)
-			STM_SetLedMode(ret);
-
-		STM_ShutdownToIdle();
-	} else {
-		STM_ShutdownToStandby();
-	}
+	STM_ShutdownToStandby();	
 }
 
 extern "C" void Sys_Shutdown(void)
