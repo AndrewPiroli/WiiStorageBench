@@ -166,22 +166,11 @@ HomeMenu::HomeMenu()
 		Append(BatteryBtn[i]);
 	}
 
-	//if(!MusicPlayer::Instance()->IsStopped())
-	//	MusicPlayer::Instance()->Pause();
 
-	// play home sound
-	//HomeInSnd->Play();
-}
 
 HomeMenu::~HomeMenu()
 {
 	RemoveAll();
-
-	//HomeOutSnd->Stop();
-
-	//if(!MusicPlayer::Instance()->IsStopped())
-	//	MusicPlayer::Instance()->Resume();
-
 	delete WiimoteBtn;
 	delete ShutdownBtn;
 	delete ExitBtn;
@@ -263,34 +252,24 @@ void HomeMenu::OnButtonClick(GuiButton *sender, int pointer UNUSED, const POINT 
 {
 	if(sender == TopBtn || sender == BottomBtn)
 	{
-		//HomeInSnd->Stop();
-		//HomeOutSnd->Play();
 		this->hide();
 
 		Application::Instance()->PushForDelete(this);
 	}
 	else if (sender == ExitBtn)
 	{
-		int ret = WindowPrompt(tr("Exit WiiXplorer?"), 0, tr( "Homebrew Channel" ), tr( "Wii Menu" ), tr("Cancel"));
-		if (ret == 1)
+		int ret = WindowPrompt(tr("Exit WiiXplorer?"), 0, tr( "Homebrew Channel" ), tr( "Also Homebrew Channel" ), tr("Cancel"));
+		if (ret == 1 || ret == 2)
 		{
 			Sys_LoadHBC();
-		}
-		else if(ret == 2)
-		{
-			Sys_LoadMenu();
 		}
 	}
 	else if (sender == ShutdownBtn)
 	{
-		int ret = WindowPrompt(tr("Shutdown the Wii?"), 0, tr("To Standby"), tr("To Idle"), tr("Cancel"));
-		if (ret == 1)
+		int ret = WindowPrompt(tr("Shutdown the Wii?"), 0, tr("To Standby"), tr("Also standby"), tr("Cancel"));
+		if (ret == 1 || ret == 2)
 		{
 			Sys_ShutdownToStandby();
-		}
-		else if(ret == 2)
-		{
-			Sys_ShutdownToIdle();
 		}
 	}
 }

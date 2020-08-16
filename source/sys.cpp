@@ -168,7 +168,8 @@ extern "C" bool IsFromHBC()
 extern "C" void Sys_LoadHBC(void)
 {
 	ExitApp();
-
+	SYS_ResetSystem(SYS_SHUTDOWN, 0,0 );
+	exit(0);
 	WII_Initialize();
 
 	int ret = WII_LaunchTitle(HBC_LULZ);

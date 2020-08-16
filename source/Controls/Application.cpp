@@ -335,20 +335,6 @@ void Application::init(void)
 	//! Set main thread prio very high as it is the render thread
 	LWP_SetThreadPriority(LWP_GetSelf(), 121);
 
-	//! Initialize sound handler thread
-	//SoundHandler::Instance();
-
-	//! Initialize network thread if selected
-	if(false)//Settings.AutoConnect)
-	{
-		//InitNetworkThread();
-		//ResumeNetworkThread();
-	}
-
-	//! FTP Server thread
-	//if(Settings.FTPServer.AutoStart)
-	//	FTPServer::Instance()->StartupFTP();
-
 	//! Initialize the task thread
 	ThreadedTaskHandler::Instance()->setThreadPriority(Settings.CopyThreadPrio);
 
@@ -361,12 +347,6 @@ void Application::init(void)
 	bgColor[1] = RGBATOGXCOLOR(Settings.BackgroundUR);
 	bgColor[2] = RGBATOGXCOLOR(Settings.BackgroundBR);
 	bgColor[3] = RGBATOGXCOLOR(Settings.BackgroundBL);
-
-	//! Setup the music player
-	//MusicPlayer::Instance()->SetVolume(Settings.MusicVolume);
-	//MusicPlayer::Instance()->SetLoop(Settings.BGMLoopMode);
-	//MusicPlayer::Instance()->SetAlignment(ALIGN_RIGHT | ALIGN_TOP);
-	//MusicPlayer::Instance()->SetPosition(30, 230);
 
 	//! Fade window out
 	window.SetEffect(EFFECT_FADE, -20);
