@@ -89,7 +89,7 @@ extern "C" void __Sys_PowerCallback(void)
 
 extern "C" void Sys_Init(void)
 {
-	SYS_SetResetCallback(__Sys_ResetCallback);
+	SYS_SetResetCallback((resetcallback)__Sys_ResetCallback);
 	SYS_SetPowerCallback(__Sys_PowerCallback);
 }
 
