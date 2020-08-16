@@ -165,7 +165,7 @@ HomeMenu::HomeMenu()
 
 		Append(BatteryBtn[i]);
 	}
-
+}
 
 
 HomeMenu::~HomeMenu()
