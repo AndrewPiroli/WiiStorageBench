@@ -27,7 +27,7 @@
 #include "Tools/tools.h"
 #include "Tools/encrypt.h"
 
-#define DEFAULT_APP_PATH	"apps/WiiXplorer/"
+#define DEFAULT_APP_PATH	"apps/WiiStorageBench/"
 #define CONFIGPATH			DEFAULT_APP_PATH
 #define CONFIGNAME			"WiiXplorer.cfg"
 #define LANGPATH			"Languages/"
