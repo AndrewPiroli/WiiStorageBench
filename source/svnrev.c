@@ -1,4 +1,4 @@
-#define SVN_REV "0"
+#define SVN_REV "1"
 
 const char * SvnRev()
 {
