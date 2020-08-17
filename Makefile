@@ -51,7 +51,7 @@ LDFLAGS		=	$(MACHDEP) -Wl,-Map,$(notdir $@).map,-wrap,malloc,-wrap,free,-wrap,me
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
 LIBS := -ldi -lgd -ljpeg -lpng -lz -lfat \
-		-lntfs -lwiikeyboard -lmad -lwiiuse -lbte -logc \
+		-lntfs -lwiikeyboard -lwiiuse -lbte -logc \
 		-lfreetype -lbz2
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
